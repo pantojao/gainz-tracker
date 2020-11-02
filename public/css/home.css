@@ -1,0 +1,15 @@
+nav{
+    display: flex;
+}
+
+.nav-links{
+  display: flex;
+  justify-content: space-around;
+  margin-right: 1em;
+}
+
+.nav-link{
+  text-decoration: none;
+  
+  color: white;
+}
