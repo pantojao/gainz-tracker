@@ -1,18 +1,31 @@
-<h1>Welcome to Gainz Tracker</h1>
-<h1>Create a New Account</h1>
+<link rel="stylesheet" type="text/css" href="css/register.css" />
 
-<% if (locals.message) { %>
-    <p><%= message %></p>
-<% } %>
+<body>
+    <h1>Gainz Tracker</h1>
 
-<form action="/register" method="POST" autocomplete="off">
-    <label>User Name</label>
-    <input name="userName" type="text" >
-    <label>Password</label>
-    <input name="password" type="text">
-    <input type="submit" value="submit"> 
-</form>
-<a href="/">Login</a>
+    <% if (locals.message) { %>
+        <p><%= message %></p>
+    <% } %>
+
+    <div class="registration-box">
+        <p class="slogan">Keep Track of Your Progress</p>
+        <form action="/register" method="POST" autocomplete="off">
+            <label>User Name</label>
+            <input name="userName" type="text" >
+            <label>Password</label>
+            <input name="password" type="text">
+            <input type="submit" value="Register"> 
+        </form>
+
+        <div class="login-redirect">
+            <p>Already Have An Account?</p>
+            <a href="/">Login</a>
+        </div>
+    </div>
+</body>
+
+
+
 
 
 

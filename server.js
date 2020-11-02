@@ -13,6 +13,7 @@ const User = require('./models/userModel.js')
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }));
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+app.use(express.static(__dirname + '/public'));
 
 mongoose.connection.on('connect', () =>{
     console.log("connected to database")
