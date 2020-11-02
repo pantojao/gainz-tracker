@@ -1,15 +1,16 @@
 nav{
     display: flex;
+    justify-content: flex-end;
 }
 
 .nav-links{
   display: flex;
   justify-content: space-around;
-  margin-right: 1em;
+  list-style: none;
 }
 
-.nav-link{
+a{
   text-decoration: none;
-  
+  margin-right: 1em;
   color: white;
 }
