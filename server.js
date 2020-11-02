@@ -10,6 +10,7 @@ const registerRoute = require('./routes/register')
 const newSessionRoute = require('./routes/new-session')
 const sessionsRoute = require('./routes/sessions')
 const progressRoute = require('./routes/progress')
+const usersRoute = require('./routes/users')
 
 const User = require('./models/userModel.js') 
 
@@ -28,7 +29,7 @@ app.use('/register', registerRoute)
 app.use('/new-session', newSessionRoute)
 app.use('/sessions', sessionsRoute)
 app.use('/progress', progressRoute)
-
-app.listen(3000, () => {
-    console.log('listening on port 3000')
+app.use('/users', usersRoute)
+app.listen(3001, () => {
+    console.log('listening on port 3001')
 })
