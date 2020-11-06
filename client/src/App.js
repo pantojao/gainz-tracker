@@ -1,12 +1,10 @@
-import React from 'react'
-import Nav from './components/nav'
-import RoutineCard from './components/routine'
+import React from "react";
+import NewSession from "./components/newSession";
 
 function App() {
   return (
     <div className="App">
-     <Nav />
-     <RoutineCard routineName="Legs"/>
+      <NewSession />
     </div>
   );
 }

@@ -1,3 +1,7 @@
+
+body{
+  font-family: sans-serif;
+}
 nav{
   display: flex;
   justify-content: flex-end;
@@ -15,11 +19,54 @@ margin-right: 1em;
 color: white;
 }
 
-.exerciseCard{
-  max-width: 90%;
-  margin: 0 auto;
+
+.new-exercise-inputs{
+  display:flex;
+  width: 100%;
+  margin: .8em auto;
+  
 }
-.routine-column-names{
+
+.routine-name{
   display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 3em;
+}
+
+
+.routine-name-input{
+  width: 30% !important;
+  border-style: none none solid none !important;
+}
+.bi-pencil{
+  margin: auto 1em;
+}
+
+.create-routine{
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.create-routine-buttons{
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+}
+.routine-buttons{
+  margin-top: 1.5em;
+}
+.number-input{
+  width: 5em  !important;
+}
+
+.form-control{
+  margin: 0 1em !important;
+}
+.sm-labels{
+  margin-right: 2em;
+  margin: auto 0;
 }
