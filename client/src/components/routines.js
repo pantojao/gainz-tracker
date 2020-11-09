@@ -1,0 +1,54 @@
+import React, { useState, useEffect } from "react";
+const axios = require("axios");
+
+function Routines(props) {
+  const [userRoutines, setUserRoutines] = useState(null);
+  useEffect(async () => {
+    let routines = await axios.get("get-routines");
+    setUserRoutines(routines.data.routines);
+    console.log(routines.data.routines);
+  }, []);
+
+  let userCards = [];
+
+  if (userRoutines !== null) {
+    userRoutines.forEach((routine) => {
+      let exercises = [];
+      routine.exercises.forEach((exercise) => {
+        exercises.push(exercise.exerciseName.split("+").join(" ") + ", ");
+      });
+      userCards.push(
+        <div className="your-routine">
+          <h2>{routine.routineName.split("+").join(" ")}</h2>
+          <p>{exercises}</p>
+        </div>
+      );
+    });
+  }
+
+  return (
+    <div className="routines">
+      <button className="btn btn-dark create-routine-btn">Create Routine</button>
+      <h2 className="your-routines-header">Your Routines</h2>
+      <div className="your-routines">{userCards}</div>
+
+      <h2 className="default-routines-header">Default Routines</h2>
+      <div className="default-routines">
+        <div className="default-card">
+          <h2>Push</h2>
+          <p>Bench Press, Dips, Overhead Press, Chest Flys, Tricep Extension</p>
+        </div>
+        <div className="default-card">
+          <h2>Pull</h2>
+          <p>Pull Ups, Lat Pulldowns, Curls, Rows</p>
+        </div>
+        <div className="default-card">
+          <h2>Legs</h2>
+          <p>Squats, Calve Raises, Leg Curls, Lunges, Hamstring Curls</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Routines;

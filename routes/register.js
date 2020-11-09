@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/userModel");
+const {User} = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const axios = require('axios')
 
 router.get("/", (req, res) => {
   res.render("register");
@@ -25,9 +26,11 @@ router.post("/", async (req, res) => {
         password: hash,
       });
       await user.save();
-      res.redirect("homepage");
+      res.redirect('/proxy')
+      // res.redirect("homepage");
     }
   } catch (error) {
+    console.log(error)
     res.render("register");
   }
 });
