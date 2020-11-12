@@ -15,6 +15,7 @@ justify-content: space-around;
 list-style: none;
 }
 
+
 .nav-link{
 text-decoration: none;
 margin-right: 1em;
@@ -26,7 +27,11 @@ color: white;
   display:flex;
   width: 100%;
   margin: .8em auto;
-  
+
+}
+
+.bi-trash-fill{
+  margin: auto 0 
 }
 .routine-name{
   display: flex;
@@ -38,6 +43,37 @@ color: white;
 .routine-name-input{
   width: 30% !important;
   border-style: none none solid none !important;
+  
+}
+
+.routine-name-input:focus, textarea:focus {
+  width: 30% !important;
+  border-style: none none solid none !important;
+}
+
+.form-control:focus{
+  outline:none none solid none !important;
+  border-style: none none solid none !important;
+
+}
+
+.submit-btn{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+}
+
+
+.bi-check{
+  background-color:#000;
+  opacity:0.5;
+  border-radius:30px;
+}
+
+.bi-check:hover{
+  background-color: transparent;
+  opacity:1;
+  border-radius:30px;
 }
 .bi-pencil{
   margin: auto 1em;
@@ -94,7 +130,7 @@ color: white;
   grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
 }
 .your-routine{
-  background-color:red;
+  background-color:rgb(110, 32, 32);
   padding: .5em 1em;
 }
 .your-routines-header{
@@ -112,3 +148,7 @@ color: white;
 
 }
 
+.routine-card-header{
+  display: flex;
+  justify-content: space-between;
+}

@@ -7,7 +7,6 @@ router.get('/', async (req,res) =>{
   if (req.isAuthenticated()){
     const user = await User.findOne({username: req.user.username})
     const userRoutines = user.routines
-    console.log(userRoutines)
     res.send(userRoutines)
   } else {
     res.send('login')

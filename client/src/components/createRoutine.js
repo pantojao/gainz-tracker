@@ -60,7 +60,11 @@ function CreateRoutine(props) {
         required
         aria-required="true"
       />
-      <input className="btn btn-dark" type="submit" value="done" />
+      <button type="submit" className="submit-btn">
+        <svg width="2em" height="2em" viewBox="0 0 16 16" className="bi bi-check text-success" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+        </svg>
+      </button>
     </form>
   ) : (
     <div className="routine-name">
@@ -70,7 +74,7 @@ function CreateRoutine(props) {
         onClick={() => editTitle()}
         height="1em"
         viewBox="0 0 16 16"
-        className="bi bi-pencil"
+        className="bi bi-pencil text-primary"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -87,9 +91,8 @@ function CreateRoutine(props) {
       let Data = data; 
       for (let exercise of Data) {
         exercise.exerciseName = exercise.exerciseName
-        exercise.routineName = routineName.trim().replace(/\s/g, "+");;
+        exercise.routineName = routineName
       }
-
       try {
         const config = {
           headers: {
