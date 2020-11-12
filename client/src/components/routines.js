@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 const axios = require("axios");
 
 function Routines(props) {
   const [userRoutines, setUserRoutines] = useState(null);
+
   useEffect(async () => {
-    let routines = await axios.get("get-routines");
-    setUserRoutines(routines.data.routines);
-    console.log(routines.data.routines);
+    let serverResponse = await axios.get("get-routines");
+    setUserRoutines(serverResponse.data);
+    console.log(serverResponse.data);
   }, []);
 
   let userCards = [];
@@ -14,11 +16,14 @@ function Routines(props) {
   if (userRoutines !== null) {
     userRoutines.forEach((routine) => {
       let exercises = [];
+  
       routine.exercises.forEach((exercise) => {
         exercises.push(exercise.exerciseName.split("+").join(" ") + ", ");
       });
+      exercises[exercises.length -1] = exercises[exercises.length -1].replace(/,\s*$/, "");
+      
       userCards.push(
-        <div className="your-routine">
+        <div className="your-routine" key={routine._id}>
           <h2>{routine.routineName.split("+").join(" ")}</h2>
           <p>{exercises}</p>
         </div>
@@ -28,7 +33,7 @@ function Routines(props) {
 
   return (
     <div className="routines">
-      <button className="btn btn-dark create-routine-btn">Create Routine</button>
+      <button className="btn btn-dark create-routine-btn"><Link to='/new-routine'>Create Routine</Link></button>
       <h2 className="your-routines-header">Your Routines</h2>
       <div className="your-routines">{userCards}</div>
 

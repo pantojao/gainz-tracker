@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ExerciseInput from "./subcomponents/exerciseInput";
+import { useHistory } from "react-router-dom";
 const axios = require("axios");
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
 
 function CreateRoutine(props) {
   const [routineName, setRoutineName] = useState("Your Routine");
@@ -15,6 +9,7 @@ function CreateRoutine(props) {
   const [data, setData] = useState([]);
   const [send, setSend] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const history = useHistory();
 
   const callBackFunction = (childData) => {
     let Data = data;
@@ -92,30 +87,24 @@ function CreateRoutine(props) {
       let Data = data; 
       for (let exercise of Data) {
         exercise.exerciseName = exercise.exerciseName
-          .trim()
-          .replace(/\s/g, "+");
-        exercise.routineName = routineName.trim()
-        .replace(/\s/g, "+");;
+        exercise.routineName = routineName.trim().replace(/\s/g, "+");;
       }
 
       try {
-        console.log(Data)
         const config = {
           headers: {
             "Content-Type": "application/JSON",
           },
         };
-        
         await axios.post("/create-routine", Data, config);
+        history.push('/routines')
       } catch (error) {
         console.log(error);
       }
       
     }
-
   }, [send]);
   
-
   let invalid = routineName === "" ? true : false;
 
   return (
@@ -141,7 +130,6 @@ function CreateRoutine(props) {
           />
         </div>
       </form>
-      {(send===true) ? <Redirect to="/routines" /> : null}
     </>
   );
 }

@@ -1,30 +1,21 @@
-const bodyParser = require("body-parser");
 const express = require("express");
-const { findOne } = require("../models/userModel");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const {User} = require("../models/userModel");
+const passport = require("passport")
 
-const User = require("../models/userModel");
-
-router.get("/", (req, res) => {
-  res.render("login");
-});
-
-router.post("/", async (req, res) => {
-  try {
-    let data = await User.findOne({ userName: req.body.userName });
-    if (data === null) {
-      res.render("login", { message: "account does not exist" });
-    } else {
-      if (bcrypt.compareSync(req.body.password, data.password)) {
-        res.redirect("/homepage");
-      } else {
-        res.render("login", { message: "password is incorrect" });
-      }
+router.post("/",  (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) throw err;
+    if (!user) res.send("Incorrect Password or Username");
+    else {
+      req.logIn(user, (err) => {
+        if (err) throw err;
+        res.send("Successfully Authenticated");
+        console.log(req.user);
+      });
     }
-  } catch (error) {
-    res.render("login");
-  }
+  })(req, res, next);
 });
 
 module.exports = router;

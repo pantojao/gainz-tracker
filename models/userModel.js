@@ -18,7 +18,7 @@ const session = new mongoose.Schema({
 });
 
 const user = new mongoose.Schema({
-  userName: { type: String, required: true },
+  username: { type: String, required: true },
   password: { type: String, required: true },
   sessions: [session],
   routines: [routine]

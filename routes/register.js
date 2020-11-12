@@ -2,37 +2,33 @@ const express = require("express");
 const router = express.Router();
 const {User} = require("../models/userModel");
 const bcrypt = require("bcrypt");
-const axios = require('axios')
 
-router.get("/", (req, res) => {
-  res.render("register");
-});
 
 router.post("/", async (req, res) => {
   let user = new User({
-    userName: req.body.userName,
+    username: req.body.username,
     password: req.body.password,
   });
 
   try {
-    let data = await User.findOne({ userName: req.body.userName });
+    const data = await User.findOne({ username: req.body.username });
+    if (data!==null) {
+      res.send("Username Taken")
 
-    if (data !== null) {
-      res.render("register", { message: "username is taken" });
     } else {
-      let hash = await bcrypt.hash(req.body.password, 12);
-      let user = new User({
-        userName: req.body.userName,
+      const hash = await bcrypt.hash(req.body.password, 12);
+      const user = new User({
+        username: req.body.username,
         password: hash,
       });
+
       await user.save();
-      res.redirect('/proxy')
-      // res.redirect("homepage");
+      res.send("User Created")
     }
   } catch (error) {
     console.log(error)
-    res.render("register");
   }
+
 });
 
 module.exports = router;
