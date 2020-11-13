@@ -13,12 +13,11 @@ router.post("/", async (req, res) => {
     exercise.exerciseName = exercise.exerciseName.replace(/\s+/g,' ').trim().toLowerCase().split(" ")
     exercise.exerciseName = exercise.exerciseName.map(word => word.charAt(0).toUpperCase()+ word.slice(1)).join(" ")
   })
-  console.log(data)
 
-  data.forEach((x) => exercisesArray.push({
-      exerciseName: x.exerciseName,
-      sets: x.sets, 
-      reps: x.reps,
+  data.forEach((exercise) => exercisesArray.push({
+      exerciseName:  exercise.exerciseName,
+      sets: exercise.sets, 
+      reps: exercise.reps,
       weight: 0
     }))
 
@@ -29,7 +28,8 @@ router.post("/", async (req, res) => {
   currentUser.routines.push(newRoutine)
 
   try {
-    await currentUser.save()
+    const mongoResponse = await currentUser.save()
+    console.log(mongoResponse)
     res.send("Routine Created")
   } catch (error) {
     console.log(error)

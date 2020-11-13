@@ -16,6 +16,7 @@ const registerRoute = require("./routes/register");
 const getRoutinesRoute = require('./routes/get-routines')
 const createRoutineRoute = require("./routes/create-routine");
 const removeRoutineRoute = require("./routes/remove-routine");
+const editRoutineRoute = require("./routes/edit-routine");
 
 // DATABASE IMPLEMENTATION
 mongoose.connect(process.env.MONGO_URI, {
@@ -82,6 +83,7 @@ app.use("/register", registerRoute);
 app.use("/get-routines", getRoutinesRoute)
 app.use("/create-routine", createRoutineRoute);
 app.use("/remove-routine", removeRoutineRoute)
+app.use("/edit-routine", editRoutineRoute)
 
 
 

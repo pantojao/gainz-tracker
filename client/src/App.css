@@ -152,3 +152,14 @@ color: white;
   display: flex;
   justify-content: space-between;
 }
+
+.edit-routines-overlay{
+  position: absolute;
+  width: 80vw;
+  height: 90vh;
+  margin: 5% 10%;
+  background-color: black;
+  opacity: 1;
+  padding: 5em;
+  animation: blinker 1s cubic-bezier(0.5, 0, 1, 1) infinite alternate;
+}

@@ -1,41 +1,73 @@
-import React, { useState, useEffect } from "react";
-import ExerciseInput from "./subcomponents/exerciseInput";
-import { useHistory } from "react-router-dom";
-const axios = require("axios");
+import React, {useEffect, useState} from "react"
+import EditInput from "./subcomponents/editInput";
+const axios = require("axios")
 
-function CreateRoutine(props) {
-  const [routineName, setRoutineName] = useState("Your Routine");
-  const [exerciseNumber, setExerciseNumber] = useState(1);
+function EditRoutines(props) {
+  const [routineName, setRoutineName] = useState(null)
+  const [exercises, setExercises] = useState(null)
+  const [exerciseNumber, setExerciseNumber] = useState(null);
   const [data, setData] = useState([]);
-  const [send, setSend] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const history = useHistory();
 
-  const callBackFunction = (childData) => {
-    let Data = data;
-    let index = Data.findIndex((input) => input.id === childData.id);
-    if (index >= 0) Data[index] = childData;
-    else if (childData.id === "delete") Data.splice(index, 1);
-    else Data = [...Data, childData];
-    setData(Data);
-  };
+  // WILL RUN WILL PAGE IS FIRST RENDERED
+  useEffect(async () => {
+    let routineToEdit =  props.routines.filter((exercises => exercises._id === props.routineKey))
+    setRoutineName(routineToEdit[0].routineName)
+    setExercises(routineToEdit[0].exercises)
+    setData(routineToEdit[0].exercises)
+  },[])
 
-  const createRoutine = (event) => {
-    event.preventDefault();
-    setSend(!send);
-  };
-
-  const addInput = () => setExerciseNumber(exerciseNumber + 1);
+  // COMPONENT FUNCTIONS
+  const addInput = () => setExerciseNumber(exerciseNumber + 1)
+  const handleCancel = () => props.parentCallBack("done")
   const editTitle = () => setEditMode(!editMode);
   const changeRoutineName = () => setEditMode(!editMode);
 
-  let inputs = [];
-  for (let i = 0; i < exerciseNumber; i++) {
-    inputs.push(
-      <ExerciseInput key={i} id={i} parentCallBack={callBackFunction} />
-    );
+  const editRoutine = async(event) => {
+    let newRoutine = {}
+    newRoutine["exercises"] = data
+    newRoutine["routineKey"] = props.routineKey
+    newRoutine["routineName"] = routineName
+  
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/JSON",
+        },
+      };
+      let serverResponse = await axios.post("/edit-routine", newRoutine , config); 
+      console.log(serverResponse)
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
+  // CALLBACK FUNCTION TO RETRIEVE INPUTS
+  const callBackFunction = (childData) => {
+    let Data = data;
+    let index = Data.findIndex((input) => input.id === childData.id);
+
+    if (index >= 0) Data[index] = childData;
+    else if (childData.id === "delete") Data.splice(index, 1);
+    else  Data = [...Data, childData];
+    setData(Data);
+  };
+
+  // DETERMINES THE NUMBER OF INPUTS THAT WILL BE DISPLAYED
+  let exercisesInputs = []
+  if(exercises){
+    for (let exercise of exercises){
+      exercisesInputs.push(<EditInput exerciseName = {exercise.exerciseName} key={exercise._id} id={exercise._id} reps={exercise.reps} sets = {exercise.sets} parentCallBack={callBackFunction}/>)
+    }
+    if (exerciseNumber>0){
+      for (let i = 0; i < exerciseNumber; i++){
+        exercisesInputs.push(<EditInput key={i} id={i} parentCallBack={callBackFunction}/>)
+      }
+    }
+  }
+
+  // CODE TO EDIT ROUTINE TITLE
   const RoutineName = editMode ? (
     <form
       className="routine-name"
@@ -74,39 +106,14 @@ function CreateRoutine(props) {
       </svg>
     </div>
   );
-
-  useEffect(async () => {
-    if (send) {
-      let Data = data; 
-      for (let exercise of Data) {
-        exercise.exerciseName = exercise.exerciseName
-        exercise.routineName = routineName
-      }
-      try {
-        const config = {
-          headers: {
-            "Content-Type": "application/JSON",
-          },
-        };
-        await axios.post("/create-routine", Data, config);
-        history.push('/routines')
-      } catch (error) {
-        console.log(error);
-      }
-      
-    }
-  }, [send]);
-  
   let invalid = routineName === "" ? true : false;
 
-  return (
-    <>
+  // JSX RETURNED
+  return(
+    <div className="edit-routines-overlay">
       {RoutineName}
-      <form
-        onSubmit={(event) => createRoutine(event)}
-        className="create-routine"
-      >
-        {inputs}
+      <form onSubmit={(event) => editRoutine(event)} className="create-routine">
+        {exercisesInputs}
         <div className="create-routine-buttons">
           <button
             className="routine-buttons btn btn-primary"
@@ -116,14 +123,16 @@ function CreateRoutine(props) {
           </button>
           <input
             type="submit"
-            value="Create Routine"
+            value="Edit Routine"
             disabled={invalid}
             className="routine-buttons btn btn-success"
           />
         </div>
       </form>
-    </>
-  );
+      <button className="btn btn-danger btn-sm" onClick = {() => handleCancel()}>Cancel</button>
+    </div>
+   
+  )
 }
 
-export default CreateRoutine;
+export default EditRoutines

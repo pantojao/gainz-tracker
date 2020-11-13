@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-function ExerciseInput(props) {
-  const [exerciseName, setExerciseName] = useState(undefined);
-  const [sets, setSets] = useState(3);
-  const [reps, setReps] = useState(8);
+function EditInput(props) {
+  const [exerciseName, setExerciseName] = useState(props.exerciseName);
+  const [sets, setSets] = useState(props.sets);
+  const [reps, setReps] = useState(props.reps);
   const [deleteSelf, setDelete] = useState(false);
 
   useEffect(() => {
@@ -14,8 +14,8 @@ function ExerciseInput(props) {
       sets: sets,
       reps: reps,
     });
-  }, [exerciseName, sets, reps, deleteSelf]);
-
+  }, []);
+  
   const changeName = (event) => setExerciseName(event.target.value);
   const changeSets = (event) => setSets(event.target.value);
   const changeReps = (event) => setReps(event.target.value);
@@ -29,6 +29,7 @@ function ExerciseInput(props) {
           className="form-control"
           type="text"
           placeholder="Exercise"
+          value={exerciseName}
           onChange={(event) => changeName(event)}
           required
           aria-required="true"
@@ -55,10 +56,10 @@ function ExerciseInput(props) {
           required
           aria-required="true"
         />
+        
         <svg onClick={(event) => removeInput(event)} width="4em" height="2em" viewBox="0 0 16 16" className="bi bi-trash-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fillRule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
         </svg>
-  
       </div>
     );
   } else {
@@ -66,4 +67,4 @@ function ExerciseInput(props) {
   }
 }
 
-export default ExerciseInput;
+export default EditInput;

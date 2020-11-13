@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const exercise = new mongoose.Schema({
   exerciseName: { type: String, required: true },
   sets: Number,
-  repititions: Number,
+  reps: Number,
   weight: [Number],
 });
 

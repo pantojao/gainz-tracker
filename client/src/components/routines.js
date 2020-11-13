@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-const axios = require("axios");
-import "bootstrap/dist/css/bootstrap.min.css";
+import EditRoutine from './editRoutine'
 import Dropdown from "react-bootstrap/Dropdown";
+import "bootstrap/dist/css/bootstrap.min.css";
+const axios = require("axios");
 
 function Routines(props) {
   const [userRoutines, setUserRoutines] = useState(null);
+  const [editRoutine, setEditRoutine] = useState(null)
+
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
       href=""
@@ -20,24 +23,19 @@ function Routines(props) {
         width="1em"
         height="1em"
         viewBox="0 0 16 16"
-        class="bi bi-three-dots-vertical"
+        className="bi bi-three-dots-vertical"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          fill-rule="evenodd"
+          fillRule="evenodd"
           d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
         />
       </svg>
     </a>
   ));
-
-  useEffect(async () => {
-    let serverResponse = await axios.get("get-routines");
-    setUserRoutines(serverResponse.data);
-  }, []);
-
-  let removeRoutine = async (key) => {
+  
+  const removeRoutine = async (key) => {
     let newUserRoutine = userRoutines.filter(routines => {
       return routines._id !==key
     })
@@ -50,20 +48,29 @@ function Routines(props) {
         },
       };
       await axios.post("/remove-routine", newUserRoutine, config);
-
+      
     } catch (error) {
       console.log(error);
     }
   }
 
+  const changeRoutine = async (key) => {
+    setEditRoutine(key)
+  }
+  
+  useEffect(async () => {
+    let serverResponse = await axios.get("get-routines");
+    setUserRoutines(serverResponse.data);
+  }, []);
+
   let userCards = [];
   if (userRoutines !== null) {
     userRoutines.forEach((routine) => {
       let exercises = [];
-
       routine.exercises.forEach((exercise) => {
         exercises.push(exercise.exerciseName + ", ");
       });
+
       exercises[exercises.length - 1] = exercises[exercises.length - 1].replace(
         /,\s*$/,
         ""
@@ -76,7 +83,7 @@ function Routines(props) {
               <Dropdown.Toggle as={CustomToggle}></Dropdown.Toggle>
               <Dropdown.Menu size="sm" title="">
                 <Dropdown.Item>Start Routine</Dropdown.Item>
-                <Dropdown.Item>Edit Routine</Dropdown.Item>
+                <Dropdown.Item onClick={() => changeRoutine(routine._id)}>Edit Routine</Dropdown.Item>
                 <Dropdown.Item onClick={() => removeRoutine(routine._id)}>Delete Routine</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
@@ -87,7 +94,20 @@ function Routines(props) {
     });
   }
 
+  useEffect(() => {
+    console.log("done editing")
+  },[editRoutine])
+
+  const callBackFunction = (childData) => {
+    if (childData === "done"){
+      setEditRoutine(null)
+    }
+  }
+
+
   return (
+    <>
+    {(editRoutine!==null) ? <EditRoutine routines={userRoutines} routineKey={editRoutine} parentCallBack={callBackFunction}/> : null }
     <div className="routines">
       <button className="btn btn-dark create-routine-btn">
         <Link to="/new-routine">Create Routine</Link>
@@ -111,6 +131,7 @@ function Routines(props) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
