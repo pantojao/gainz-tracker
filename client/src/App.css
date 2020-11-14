@@ -154,10 +154,10 @@ color: white;
 }
 
 .edit-routines-overlay{
-  position: absolute;
-  width: 80vw;
-  height: 90vh;
-  margin: 5% 10%;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
   background-color: black;
   opacity: 1;
   padding: 5em;

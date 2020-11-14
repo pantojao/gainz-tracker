@@ -4,17 +4,21 @@ function EditInput(props) {
   const [exerciseName, setExerciseName] = useState(props.exerciseName);
   const [sets, setSets] = useState(props.sets);
   const [reps, setReps] = useState(props.reps);
+  const [routineId, setRoutineId] = useState(props.exerciseId)
+  const [weights, setweights] = useState(props.weights)
   const [deleteSelf, setDelete] = useState(false);
 
   useEffect(() => {
-    let id = deleteSelf ? "delete" : props.id;
+    const id = deleteSelf ? "delete" : routineId;
+ 
     props.parentCallBack({
-      id: id,
+      _id: id,
       exerciseName: exerciseName,
       sets: sets,
       reps: reps,
+      weight: weights
     });
-  }, []);
+  }, [exerciseName,sets,reps, deleteSelf]);
   
   const changeName = (event) => setExerciseName(event.target.value);
   const changeSets = (event) => setSets(event.target.value);
@@ -23,7 +27,7 @@ function EditInput(props) {
 
   if (deleteSelf === false) {
     return (
-      <div id={props.id} className="new-exercise-inputs">
+      <div id={props.exerciseId} className="new-exercise-inputs">
         <label className="sm-labels">Exercise </label>
         <input
           className="form-control"

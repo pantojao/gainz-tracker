@@ -40,7 +40,6 @@ function Routines(props) {
       return routines._id !==key
     })
     setUserRoutines(newUserRoutine)
-
     try {
       const config = {
         headers: {
@@ -54,10 +53,11 @@ function Routines(props) {
     }
   }
 
-  const changeRoutine = async (key) => {
-    setEditRoutine(key)
+  const changeRoutine = (key) => setEditRoutine(key)
+  const callBackFunction = (childData) => {
+    if (childData === "done") setEditRoutine(null)
   }
-  
+
   useEffect(async () => {
     let serverResponse = await axios.get("get-routines");
     setUserRoutines(serverResponse.data);
@@ -94,16 +94,7 @@ function Routines(props) {
     });
   }
 
-  useEffect(() => {
-    console.log("done editing")
-  },[editRoutine])
-
-  const callBackFunction = (childData) => {
-    if (childData === "done"){
-      setEditRoutine(null)
-    }
-  }
-
+ 
 
   return (
     <>

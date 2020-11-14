@@ -7,6 +7,7 @@ function EditRoutines(props) {
   const [exercises, setExercises] = useState(null)
   const [exerciseNumber, setExerciseNumber] = useState(null);
   const [data, setData] = useState([]);
+  const [sendData, setSendData] = useState(false)
   const [editMode, setEditMode] = useState(false);
 
   // WILL RUN WILL PAGE IS FIRST RENDERED
@@ -15,7 +16,30 @@ function EditRoutines(props) {
     setRoutineName(routineToEdit[0].routineName)
     setExercises(routineToEdit[0].exercises)
     setData(routineToEdit[0].exercises)
+    console.log("setExercises")
   },[])
+
+  useEffect(async () => {
+    if (sendData){   
+      let newRoutine = {}
+      newRoutine["exercises"] = data
+      newRoutine["routineKey"] = props.routineKey
+      newRoutine["routineName"] = routineName
+      
+      console.log(newRoutine)
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/JSON",
+          },
+        };
+        let serverResponse = await axios.post("/edit-routine", newRoutine , config); 
+        console.log(serverResponse)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [sendData])
 
   // COMPONENT FUNCTIONS
   const addInput = () => setExerciseNumber(exerciseNumber + 1)
@@ -23,31 +47,13 @@ function EditRoutines(props) {
   const editTitle = () => setEditMode(!editMode);
   const changeRoutineName = () => setEditMode(!editMode);
 
-  const editRoutine = async(event) => {
-    let newRoutine = {}
-    newRoutine["exercises"] = data
-    newRoutine["routineKey"] = props.routineKey
-    newRoutine["routineName"] = routineName
+  const editRoutine = (event) => setSendData(!sendData)
   
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/JSON",
-        },
-      };
-      let serverResponse = await axios.post("/edit-routine", newRoutine , config); 
-      console.log(serverResponse)
-    } catch (error) {
-      console.log(error);
-    }
-    
-  }
 
   // CALLBACK FUNCTION TO RETRIEVE INPUTS
   const callBackFunction = (childData) => {
     let Data = data;
-    let index = Data.findIndex((input) => input.id === childData.id);
-
+    let index = Data.findIndex((input) => input._id == childData._id);
     if (index >= 0) Data[index] = childData;
     else if (childData.id === "delete") Data.splice(index, 1);
     else  Data = [...Data, childData];
@@ -56,13 +62,13 @@ function EditRoutines(props) {
 
   // DETERMINES THE NUMBER OF INPUTS THAT WILL BE DISPLAYED
   let exercisesInputs = []
-  if(exercises){
+  if(exercises!==null){
     for (let exercise of exercises){
-      exercisesInputs.push(<EditInput exerciseName = {exercise.exerciseName} key={exercise._id} id={exercise._id} reps={exercise.reps} sets = {exercise.sets} parentCallBack={callBackFunction}/>)
+      exercisesInputs.push(<EditInput weights={exercise.weight} exerciseName = {exercise.exerciseName} key={exercise._id} exerciseId={exercise._id} reps={exercise.reps} sets = {exercise.sets} parentCallBack={callBackFunction}/>)
     }
     if (exerciseNumber>0){
       for (let i = 0; i < exerciseNumber; i++){
-        exercisesInputs.push(<EditInput key={i} id={i} parentCallBack={callBackFunction}/>)
+        exercisesInputs.push(<EditInput weights={[]} key={i} exerciseId={i} parentCallBack={callBackFunction}/>)
       }
     }
   }
