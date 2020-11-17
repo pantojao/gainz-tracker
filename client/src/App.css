@@ -166,31 +166,46 @@ color: white;
   display: flex;
   justify-content: space-between;
 }
-/* 
-exerciseDisplay */
+
+
+
+/* SESSION PAGE */
+
+.exercise-table{
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.exercise-name{
+  text-align: left;
+  margin: .5em;
+}
 
 .exercise-table{
   display: flex;
   justify-content: space-between;
-  width: 90%;
-  margin: 0 auto;
-  /* outline: 2px red solid */
-}
-.exercise-name{
-  text-align: left;
-  margin-bottom: .5em;
 }
 
-.weight-input{
+.exercise-diplay-header{
+  font-size: 1rem;
+}
+
+.table-column{
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* weight-input-form */
+.weight-input-form{
   display: flex;
   justify-content: center;
-  width: 80%;
-
 }
 
 .weight-num-input{
-  margin-left: 0em;
-  width: 30% !important;
+  width: 50% !important;
 }
 
 .check-btn{
@@ -198,4 +213,3 @@ exerciseDisplay */
   background-repeat:no-repeat;
   border: none;
 }
-
