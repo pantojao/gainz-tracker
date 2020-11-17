@@ -122,20 +122,23 @@ function EditRoutines(props) {
         {exercisesInputs}
         <div className="create-routine-buttons">
           <button
-            className="routine-buttons btn btn-primary"
+            className="add-exercise-button btn btn-primary"
             onClick={() => addInput()}
           >
             Add Exercise
           </button>
-          <input
-            type="submit"
-            value="Edit Routine"
-            disabled={invalid}
-            className="routine-buttons btn btn-success"
-          />
+          <div className="submit-cancel">
+            <input
+              type="submit"
+              value="Edit Routine"
+              disabled={invalid}
+              className="submit-buttons btn btn-success"
+            />
+            <button className="btn btn-danger" onClick = {() => handleCancel()}>Cancel</button>
+          </div>
         </div>
       </form>
-      <button className="btn btn-danger btn-sm" onClick = {() => handleCancel()}>Cancel</button>
+      
     </div>
    
   )

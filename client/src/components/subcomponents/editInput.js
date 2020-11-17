@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+
 function EditInput(props) {
   const [exerciseName, setExerciseName] = useState(props.exerciseName);
   const [sets, setSets] = useState(props.sets);
@@ -10,6 +11,7 @@ function EditInput(props) {
 
   useEffect(() => {
     const id = deleteSelf ? "delete" : routineId;
+    console.log(id)
  
     props.parentCallBack({
       _id: id,

@@ -4,6 +4,7 @@ import Login from './components/login.js'
 import Register from './components/register'
 import CreateRoutine from './components/createRoutine'
 import EditRoutine from './components/editRoutine'
+import Session from './components/session'
 import { BrowserRouter as Router , Switch, Route } from "react-router-dom";
 
 function App() {
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route path="/edit-routine">
           <EditRoutine /> 
+        </Route>
+        <Route path="/session/:routineID">
+            <Session />
         </Route>
       </Switch> 
     </Router>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import EditRoutine from './editRoutine'
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,7 +8,8 @@ const axios = require("axios");
 function Routines(props) {
   const [userRoutines, setUserRoutines] = useState(null);
   const [editRoutine, setEditRoutine] = useState(null)
-
+  const history = useHistory()
+  
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
       href=""
@@ -53,7 +54,9 @@ function Routines(props) {
     }
   }
 
-  const changeRoutine = (key) => setEditRoutine(key)
+  const changeRoutine = (key) => setEditRoutine(key);
+
+
   const callBackFunction = (childData) => {
     if (childData === "done") setEditRoutine(null)
   }
@@ -61,7 +64,12 @@ function Routines(props) {
   useEffect(async () => {
     let serverResponse = await axios.get("get-routines");
     setUserRoutines(serverResponse.data);
+    console.log(serverResponse.data)
   }, []);
+
+  const startRoutine = (id) => {
+    history.push(`/session/${id}`)
+  }
 
   let userCards = [];
   if (userRoutines !== null) {
@@ -82,7 +90,7 @@ function Routines(props) {
             <Dropdown>
               <Dropdown.Toggle as={CustomToggle}></Dropdown.Toggle>
               <Dropdown.Menu size="sm" title="">
-                <Dropdown.Item>Start Routine</Dropdown.Item>
+                <Dropdown.Item onClick={() => startRoutine(routine._id)}>Start Routine</Dropdown.Item>
                 <Dropdown.Item onClick={() => changeRoutine(routine._id)}>Edit Routine</Dropdown.Item>
                 <Dropdown.Item onClick={() => removeRoutine(routine._id)}>Delete Routine</Dropdown.Item>
               </Dropdown.Menu>
@@ -96,10 +104,10 @@ function Routines(props) {
 
  
 
-  return (
-    <>
-    {(editRoutine!==null) ? <EditRoutine routines={userRoutines} routineKey={editRoutine} parentCallBack={callBackFunction}/> : null }
-    <div className="routines">
+    if(editRoutine!==null) return <EditRoutine routines={userRoutines} routineKey={editRoutine} parentCallBack={callBackFunction}/>
+
+    return(
+      <div className="routines">
       <button className="btn btn-dark create-routine-btn">
         <Link to="/new-routine">Create Routine</Link>
       </button>
@@ -122,8 +130,10 @@ function Routines(props) {
         </div>
       </div>
     </div>
-    </>
-  );
+    )
+
+    
+    
 }
 
 export default Routines;

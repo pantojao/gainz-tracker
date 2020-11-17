@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 const axios = require("axios");
 
 function CreateRoutine(props) {
-  const [routineName, setRoutineName] = useState("Your Routine");
+  const [routineName, setRoutineName] = useState("");
   const [exerciseNumber, setExerciseNumber] = useState(1);
   const [data, setData] = useState([]);
   const [send, setSend] = useState(false);
@@ -57,7 +57,7 @@ function CreateRoutine(props) {
     </form>
   ) : (
     <div className="routine-name">
-      <h1>{routineName}</h1>
+      <h1>{routineName==="" ? "Your Routine" : routineName}</h1>
       <svg
         width="1em"
         onClick={() => editTitle()}
@@ -109,17 +109,21 @@ function CreateRoutine(props) {
         {inputs}
         <div className="create-routine-buttons">
           <button
-            className="routine-buttons btn btn-primary"
+            className="add-exercise-button btn btn-primary"
             onClick={() => addInput()}
           >
             Add Exercise
           </button>
-          <input
-            type="submit"
-            value="Create Routine"
-            disabled={invalid}
-            className="routine-buttons btn btn-success"
-          />
+          <div className="submit-cancel" >
+            <input
+              type="submit"
+              value="Create Routine"
+              disabled={invalid}
+              className="submit-buttons btn btn-success"
+            />
+            <button className="btn btn-danger" onClick = {() => handleCancel()}>Cancel</button>
+          </div>
+          
         </div>
       </form>
     </>
