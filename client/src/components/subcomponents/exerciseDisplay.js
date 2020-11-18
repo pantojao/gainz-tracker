@@ -6,6 +6,7 @@ function ExerciseDisplay(props) {
   const [exerciseId, setExerciseId] = useState(null)
   const [sets, setSets] = useState(null);
   const [reps, setReps] = useState(null);
+  const [userWeights, setUserWeights] = useState(null)
   const [maxWeight, setMaxWeight] = useState(null);
   const [averageWeight, setAverageWeight] = useState(null);
   const [currentWeight, setCurrentWeight] = useState([])
@@ -21,6 +22,7 @@ function ExerciseDisplay(props) {
       weights.push(MaxWeight)
     }
     setExerciseId(data._id)
+    setUserWeights(data.weight)
     setExerciseName(data.exerciseName);
     setSets(data.sets);
     setReps(data.reps);
@@ -34,15 +36,17 @@ function ExerciseDisplay(props) {
     weightInput = parseInt(weightInput)
     let weights = currentWeight
     weights[setKey - 1] = weightInput
+
     let newWeights = weights.map((weight) => {
       if (weight==0){
         weight = weightInput
       }
       return weight
     })
-
+    props.sendWeight({"exerciseId": exerciseId, "weights": {"userWeights": userWeights, "newWeights": newWeights}})
     setCurrentWeight(newWeights)
   }
+
 
   let setsColumn = []
   let weightColumn = []
@@ -50,14 +54,13 @@ function ExerciseDisplay(props) {
   let repsColumn = []
 
   for (let i=1; i<=sets; i++){
-    console.log(i)
     setsColumn.push(<p className="column-value" key={i}>{i}</p>)
     weightColumn.push(<p className="column-value" key={i}>{`${maxWeight} / ${averageWeight}`}</p>)
     lbColumn.push(<WeightInput className="column-value" sendInput = {getInput} currentInput={currentWeight[i-1]} exerciseId={exerciseId} key={i} setKey={i}/> )
     repsColumn.push(<p className="column-value" key={i}>{reps}</p>)
   }  
 
-
+  
   return (
     <div>
       <h1 className="exercise-name">{exerciseName}</h1>

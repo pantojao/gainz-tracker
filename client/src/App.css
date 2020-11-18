@@ -1,6 +1,8 @@
 
 body{
-  font-family: sans-serif;
+    
+  font-family: monospace;
+
 }
 
 /* NAVIGATION BAR */
@@ -37,7 +39,7 @@ color: white;
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-top: 3em;
+  margin-top: 2em;
 }
 
 .routine-name-input{
@@ -74,6 +76,7 @@ color: white;
   opacity:1;
   border-radius:30px;
 }
+
 .bi-pencil{
   margin: auto 1em;
 }
@@ -170,6 +173,34 @@ color: white;
 
 
 /* SESSION PAGE */
+.session-name{
+  text-align: center
+}
+
+.session-btns{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 1em auto;
+}
+/* 
+finish-session-btn{
+  align-items: ;
+} */
+
+.rest-timer-btn{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none !important;
+  opacity:.8 !important;
+  box-shadow: none !important;
+}
+
+.rest-timer-btn:hover{
+  background-color: transparent !important;
+  opacity:1 !important;
+  border-radius:30px;
+}
 
 .exercise-table{
   display: flex;
