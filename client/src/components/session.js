@@ -8,6 +8,8 @@ function Session(){
   const [routineName, setRoutineName] = useState(null)
   const [weightData, setWeightData] = useState([])
   const [inputError, setInputError] = useState(null)
+  const [startTime, setStartTime] = useState(null)
+
   let slug = useParams()
 
   useEffect(async() => {
@@ -15,6 +17,7 @@ function Session(){
       let serverResponse = await axios.post("/start-session", {"routine": slug.routineID});
       setData(serverResponse.data)
       setRoutineName(serverResponse.data.routineName)
+      setStartTime(new Date().toLocaleString())
     } catch (error) {
       console.log(error);
     }
@@ -59,13 +62,15 @@ function Session(){
   
   const finishSession = async() => {
     if (verifyInput()){
+      let data = {"startTime": startTime,"routineName": routineName,"exercises": weightData}
+
       try {
         const config = {
           headers: {
             "Content-Type": "application/JSON",
           },
         };
-        let serverResponse = await axios.post("/finish-session", weightData, config);
+        let serverResponse = await axios.post("/finish-session", data, config);
       } catch (error) {
         console.log(error);
       }

@@ -12,9 +12,21 @@ const routine = new mongoose.Schema({
   exercises: [exercise],
 })
 
+const sessionExercises = new mongoose.Schema({
+  exerciseName: String,
+  reps: Number, 
+  sets: Number, 
+  average: Number,
+  weights: [Number]
+})
+
 const session = new mongoose.Schema({
-  routine: routine,
-  date: { type: Date, default: Date.now },
+  routineName: String,
+  exercises: sessionExercises,
+  totalWeight: Number,
+  length: String,
+  startTime: String,
+  endTime: String
 });
 
 const user = new mongoose.Schema({

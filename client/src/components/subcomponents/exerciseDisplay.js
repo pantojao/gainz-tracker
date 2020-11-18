@@ -43,7 +43,7 @@ function ExerciseDisplay(props) {
       }
       return weight
     })
-    props.sendWeight({"exerciseId": exerciseId, "weights": {"userWeights": userWeights, "newWeights": newWeights}})
+    props.sendWeight({"exerciseId": exerciseId, "exerciseName": exerciseName, "sets": sets, "reps": reps, "exerciseAverage":averageWeight , "weights": {"userWeights": userWeights, "newWeights": newWeights}})
     setCurrentWeight(newWeights)
   }
 
