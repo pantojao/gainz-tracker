@@ -40,6 +40,7 @@ router.post('/', async (req,res) =>{
     sessionExercise.sets = exercise.sets
     sessionExercise.average = exercise.exerciseAverage
     sessionExercise.weights = exercise.weights.newWeights
+    sessionExercise.max = exercise.max
     session.exercises.push(sessionExercise)
   }
   session.routineName = userSession.routineName

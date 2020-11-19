@@ -66,16 +66,10 @@ color: white;
 }
 
 
-.bi-check{
-  opacity:0.5;
+/* .bi-check{
+  opacity:0.1;
   border-radius:30px;
-}
-
-.bi-check:hover{
-  background-color: transparent;
-  opacity:1;
-  border-radius:30px;
-}
+} */
 
 .bi-pencil{
   margin: auto 1em;
@@ -174,7 +168,8 @@ color: white;
 
 /* SESSION PAGE */
 .session-name{
-  text-align: center
+  text-align: center;
+  font-size: 2.5rem;
 }
 
 .session-btns{
@@ -183,10 +178,6 @@ color: white;
   width: 90%;
   margin: 1em auto;
 }
-/* 
-finish-session-btn{
-  align-items: ;
-} */
 
 .rest-timer-btn{
   background-color: Transparent;
@@ -208,9 +199,28 @@ finish-session-btn{
   margin: 0 auto;
 }
 
+.session-exercise-header{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 1em auto;
+  /* outline: 2px yellow solid; */
+}
+
 .exercise-name{
-  text-align: left;
-  margin: .5em;
+  font-size: 1.5rem;
+}
+
+.exercise-stats{
+  /* outline: 2px yellow solid; */
+  display: flex; 
+  flex-flow: column wrap;
+  justify-content: center
+}
+
+.exercise-stat{
+  /* outline: 2px red solid; */
+  margin: auto 0;
 }
 
 .exercise-table{
@@ -223,24 +233,97 @@ finish-session-btn{
 }
 
 .table-column{
-  width: 25%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   text-align: center;
+
+}
+
+.check-column{
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  /* outline: 2px red solid; */
 }
 
 /* weight-input-form */
+
 .weight-input-form{
-  display: flex;
-  justify-content: center;
+  margin: 0 auto;
 }
 
 .weight-num-input{
-  width: 50% !important;
+  width: 100% !important;
+  margin-left: 0em !important;
 }
 
 .check-btn{
   background-color: Transparent;
   background-repeat:no-repeat;
   border: none;
+}
+
+
+
+/* SESSION-CARD */
+.session-card-title{
+  text-align: center;
+  margin-top: .5em;
+}
+
+.session-card-details{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto
+}
+
+.session-card-data{
+  width: 90%;
+  margin: 1em auto;
+}
+
+.exercise-headers{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  
+}
+
+.exercise-header{
+  font-size: 1rem;
+
+}
+.exercise-card{
+  width: 80%;
+  margin: 1em auto
+}
+.exercise-details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* outline: 2px yellow solid; */
+}
+
+.exercise-detail{
+  margin: .5em 0;
+}
+
+.lift-improvements{
+  display: flex;
+  width: 37%;
+
+}
+
+.average-improvement{
+  margin: 0 auto;
+}
+
+.trophy-icon{
+  margin: auto 0;
+}
+
+.improvement-icon{
+  margin-top: -.5em
 }

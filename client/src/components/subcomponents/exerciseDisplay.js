@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import WeightInput from './weightInput.js'
-
+import CheckIcon from '../icons/check'
 function ExerciseDisplay(props) {
   const [exerciseName, setExerciseName] = useState(null);
   const [exerciseId, setExerciseId] = useState(null)
@@ -43,27 +43,34 @@ function ExerciseDisplay(props) {
       }
       return weight
     })
-    props.sendWeight({"exerciseId": exerciseId, "exerciseName": exerciseName, "sets": sets, "reps": reps, "exerciseAverage":averageWeight , "weights": {"userWeights": userWeights, "newWeights": newWeights}})
+    props.sendWeight({"exerciseId": exerciseId, "exerciseName": exerciseName, "sets": sets, "reps": reps, "exerciseAverage":averageWeight, "exerciseMax": maxWeight, "weights": {"userWeights": userWeights, "newWeights": newWeights}})
     setCurrentWeight(newWeights)
   }
 
 
   let setsColumn = []
-  let weightColumn = []
   let lbColumn = []
   let repsColumn = []
+  let checkMarks = []
 
   for (let i=1; i<=sets; i++){
     setsColumn.push(<p className="column-value" key={i}>{i}</p>)
-    weightColumn.push(<p className="column-value" key={i}>{`${maxWeight} / ${averageWeight}`}</p>)
     lbColumn.push(<WeightInput className="column-value" sendInput = {getInput} currentInput={currentWeight[i-1]} exerciseId={exerciseId} key={i} setKey={i}/> )
     repsColumn.push(<p className="column-value" key={i}>{reps}</p>)
+    checkMarks.push(<div className="column-value"><CheckIcon /></div>)
   }  
 
   
   return (
     <div>
-      <h1 className="exercise-name">{exerciseName}</h1>
+      <div className='session-exercise-header'>
+        <h1 className="exercise-name">{exerciseName}</h1>
+        <div className="exercise-stats">
+          <p className="exercise-stat">Max: 100{maxWeight}</p>
+          <p className="exercise-stat">Average: 100{averageWeight}</p>
+        </div>
+      </div>
+      
       <div className="exercise-table">
         <div className="table-column">
           <h2 className="exercise-diplay-header">Set</h2>
@@ -72,13 +79,6 @@ function ExerciseDisplay(props) {
           </div>
         </div>
 
-        <div className="table-column">
-          <h2 className="exercise-diplay-header">Max/Avg</h2>
-          <div className="column-values">
-            {weightColumn}
-          </div>
-        </div>
-        
         <div className="table-column">
           <h2 className="exercise-diplay-header">lbs</h2>
           <div className="column-values">
@@ -91,6 +91,9 @@ function ExerciseDisplay(props) {
           <div className="column-values">
             {repsColumn}
           </div>
+        </div>
+        <div className="check-column">
+            {checkMarks}
         </div>
       </div>
     </div>

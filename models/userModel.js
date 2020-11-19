@@ -17,6 +17,7 @@ const sessionExercise = new mongoose.Schema({
   reps: Number, 
   sets: Number, 
   average: Number,
+  max: Number,
   weights: [Number]
 })
 
