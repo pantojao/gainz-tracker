@@ -12,7 +12,7 @@ const routine = new mongoose.Schema({
   exercises: [exercise],
 })
 
-const sessionExercises = new mongoose.Schema({
+const sessionExercise = new mongoose.Schema({
   exerciseName: String,
   reps: Number, 
   sets: Number, 
@@ -22,7 +22,7 @@ const sessionExercises = new mongoose.Schema({
 
 const session = new mongoose.Schema({
   routineName: String,
-  exercises: sessionExercises,
+  exercises: [sessionExercise],
   totalWeight: Number,
   length: String,
   startTime: String,

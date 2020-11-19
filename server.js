@@ -19,6 +19,8 @@ const removeRoutineRoute = require("./routes/remove-routine");
 const editRoutineRoute = require("./routes/edit-routine");
 const startSessionRoute = require("./routes/start-session");
 const finishSessionRoute = require("./routes/finish-session");
+const sessionHistoryRoute = require("./routes/session-history");
+
 // DATABASE IMPLEMENTATION
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -87,6 +89,7 @@ app.use("/remove-routine", removeRoutineRoute)
 app.use("/edit-routine", editRoutineRoute)
 app.use("/start-session", startSessionRoute)
 app.use("/finish-session", finishSessionRoute)
+app.use("/session-history", sessionHistoryRoute)
 
 
 

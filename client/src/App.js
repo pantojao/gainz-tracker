@@ -6,6 +6,8 @@ import CreateRoutine from './components/createRoutine'
 import EditRoutine from './components/editRoutine'
 import Session from './components/session'
 import { BrowserRouter as Router , Switch, Route } from "react-router-dom";
+import SessionHistory from './components/sessionHistory'
+import SessionCard from './components/subcomponents/sessionCard'
 
 function App() {
   return (
@@ -29,6 +31,12 @@ function App() {
         </Route>
         <Route path="/session/:routineID">
             <Session />
+        </Route>
+        <Route path="/session-history">
+          <SessionHistory />
+        </Route>
+        <Route path="/session-card">
+          <SessionCard /> 
         </Route>
       </Switch> 
     </Router>

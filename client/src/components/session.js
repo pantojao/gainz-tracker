@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import ExerciseDisplay from './subcomponents/exerciseDisplay'
 const axios = require('axios')
 
@@ -10,6 +10,7 @@ function Session(){
   const [inputError, setInputError] = useState(null)
   const [startTime, setStartTime] = useState(null)
 
+  const history = useHistory()
   let slug = useParams()
 
   useEffect(async() => {
@@ -71,6 +72,7 @@ function Session(){
           },
         };
         let serverResponse = await axios.post("/finish-session", data, config);
+        if(serverResponse.data=="Session Completed") history.push("/session-history")
       } catch (error) {
         console.log(error);
       }

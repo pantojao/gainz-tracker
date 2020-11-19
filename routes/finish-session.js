@@ -48,7 +48,16 @@ router.post('/', async (req,res) =>{
   session.length = routinelength
   session.totalWeight = totalWeight
 
-  console.log(session)
+
+  try {
+    let currentUser = await User.findById({_id: req.user._id})
+    currentUser.sessions.push(session)
+    let mongoResponse = await currentUser.save()
+    console.log(mongoResponse)
+  } catch (error) {
+    console.log(error)
+  }
+  // console.log(session)
   // SAVE WEIGHT TO ROUTINES WEIGHT
   
 })
