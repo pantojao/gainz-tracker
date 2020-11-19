@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import SessionCard from './subcomponents/sessionCard'
 const axios = require('axios')
 
 
@@ -13,9 +14,17 @@ function SessionHistory(props){
     setData(data)
   }, [])
 
+  let sessionCards = []
+  if (data)
+  for(let session of data){
+    sessionCards.push(<SessionCard data={session} displayFull={false} key = {session._id}/>)
+  }
   
   return(
-    <h1>Welcome To Your Session History</h1>
+    <>
+    <h1>Session History</h1>
+    {sessionCards}
+    </>
   )
 }
 
