@@ -10,6 +10,7 @@ function ExerciseDisplay(props) {
   const [maxWeight, setMaxWeight] = useState(null);
   const [averageWeight, setAverageWeight] = useState(null);
   const [currentWeight, setCurrentWeight] = useState([])
+ 
 
   useEffect(() => {
     let data = props.data
@@ -47,7 +48,10 @@ function ExerciseDisplay(props) {
     setCurrentWeight(newWeights)
   }
 
-
+  const getCheckStatus = (status) => {
+    props.sendChecks(status)
+  }
+  
   let setsColumn = []
   let lbColumn = []
   let repsColumn = []
@@ -57,7 +61,7 @@ function ExerciseDisplay(props) {
     setsColumn.push(<p className="column-value" key={i}>{i}</p>)
     lbColumn.push(<WeightInput className="column-value" sendInput = {getInput} currentInput={currentWeight[i-1]} exerciseId={exerciseId} key={i} setKey={i}/> )
     repsColumn.push(<p className="column-value" key={i}>{reps}</p>)
-    checkMarks.push(<div className="column-value"><CheckIcon /></div>)
+    checkMarks.push(<div className="column-value"><CheckIcon key={i} confirmCheck ={getCheckStatus}/></div>)
   }  
 
   
@@ -66,8 +70,8 @@ function ExerciseDisplay(props) {
       <div className='session-exercise-header'>
         <h1 className="exercise-name">{exerciseName}</h1>
         <div className="exercise-stats">
-          <p className="exercise-stat">Max: 100{maxWeight}</p>
-          <p className="exercise-stat">Average: 100{averageWeight}</p>
+          <p className="exercise-stat">Max: {maxWeight}</p>
+          <p className="exercise-stat">Average: {averageWeight}</p>
         </div>
       </div>
       

@@ -66,9 +66,10 @@ color: white;
 }
 
 
-/* .bi-check{
-  opacity:0.1;
-  border-radius:30px;
+/* .bi-check:focus{
+  outline: none!important;
+  border: none !important;
+  box-shadow: none !important
 } */
 
 .bi-pencil{

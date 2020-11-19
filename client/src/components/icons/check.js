@@ -1,21 +1,28 @@
-import React, {useState} from 'react'
+import { PromiseProvider } from 'mongoose'
+import React, {useEffect, useState} from 'react'
 
-const CheckIcon = () => {
+const CheckIcon = (props) => {
   const [clicked, setClicked] = useState(false)
+
   const handleClick = () => {
     setClicked(!clicked)
   }
 
+  useEffect(() => {
+    props.confirmCheck(clicked)
+  }, [clicked])
+
   let checkStyle = {
     opacity:"0.4",
     borderRadius:"30px",
+    outline: "none"
   }
   if (clicked){
     checkStyle = {
       backgroundColor: "transparent",
       opacity: "1",
       borderRadius: "30px",
-     
+      outline: "none"
     }
   }
 
