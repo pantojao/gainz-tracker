@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import TrophyIcon from '../icons/trophy'
 import ImprovementIcon from '../icons/improvement'
 import ClockIcon from '../icons/clock'
-import CollapseIcon from '../icons/collapse'
 import ExpandIcon from '../icons/expand'
 
 const axios = require('axios')
@@ -15,24 +14,22 @@ function SessionCard(props){
   const [exercises, setExercises] = useState(null)
   const [sessionId, setSessionId] = useState(null)
   const [sessionTime, setSessionTime] = useState(null)
-  const [maxWeight, setMaxWeight] = useState(null)
-  const [displayFull, setDisplayFull] = useState(props.displayFull)
+  
+  const [displayFull, setDisplayFull] = useState(false)
+
 
   useEffect(() => {
     let data = props.data
-    for (let exercise of data.exercises){
-      exercise.max = 0
-    }
-
-    let max = 0; 
-    for (let exercise of data.exercises){
-      for (let weight of exercise.weights){
-        if (weight > max) max = weight
-      }
-    }
-
-    // console.log(data)
-    setMaxWeight(max)
+    // let max = 0; 
+    // for (let exercise of data.exercises){
+    //   max = 0 
+    //   for (let weight of exercise.weights){
+    //     if (weight > max) max = weight
+    //   }
+    //   exercise.maxLifted = max
+    // }
+    
+    
     setSessionData(data)
     setSessionTime(data.startTime)
     setRoutineName(data.routineName)
@@ -41,6 +38,10 @@ function SessionCard(props){
     setExercises(data.exercises)
     setSessionId(data._id)
   }, [])
+
+  const changeDisplay = () => {
+    setDisplayFull(!displayFull)
+  }
 
   let cards = []
   let rowIndex = 0 
@@ -57,7 +58,7 @@ function SessionCard(props){
                <p className="exercise-detail" >{index+1}</p>
                <p className="exercise-detail">{exercise.reps} reps of {weight} lbs</p>
                <div className="lift-improvements">
-                <p className="average-improvement">{(weight-exercise.average > 0) ?  `+${weight-exercise.average} lb` : `-${weight-exercise.average} lb`}</p>
+                <p className="average-improvement">{(weight-exercise.average > 0) ?  `+${weight-exercise.average} lb` : `${weight-exercise.average} lb`}</p>
                 {(weight > exercise.max) ? <TrophyIcon fill={true}/> : <TrophyIcon fill={false}/>}
                </div>
              </div>
@@ -77,8 +78,8 @@ function SessionCard(props){
       <div className="exercise-card-half">
         <div className="exercise-headers-half">
           <h2 className="exercise-header-half">{exercise.exerciseName}</h2>
-          <p className="exercise-header-half">{ `${maxWeight}lbs`}</p>
-          {(maxWeight > exercise.max) ? <TrophyIcon fill={true}/> : <TrophyIcon fill={false}/>}
+          <p className="exercise-header-half">{ `${exercise.maxLift}lbs`}</p>
+          {(exercise.hasMax) ? <TrophyIcon fill={true}/> : <TrophyIcon fill={false}/>}
         </div>
       </div>
     )
@@ -87,9 +88,12 @@ function SessionCard(props){
   
 
   return (displayFull) ? (
-    <div>
+    <div onBlur={() => changeDisplay()} >
       <div className="session-card-header">
-        <h1 className="session-card-title">{routineName}</h1>
+        <div className="session-card-top-half">
+          <h1 className="session-card-title-half">{routineName}</h1>
+          <ExpandIcon changeDisplay={changeDisplay}/>
+        </div>
         <p className="session-card-data">Start Time: {sessionTime}</p>
         <div className="session-card-details" >
           <p><ClockIcon /> {sessionLength}</p>
@@ -103,12 +107,11 @@ function SessionCard(props){
     <div className="session-card-header-half">
       <div className="session-card-top-half">
         <h1 className="session-card-title-half">{routineName}</h1>
-        <ExpandIcon />
+        <ExpandIcon changeDisplay={changeDisplay}/>
       </div>
       <p className="session-card-data-half">Start Time: {sessionTime}</p>
       <div className="session-card-details-half" >
         <p><ClockIcon /> {sessionLength}</p>
-        {/* <p>Total Weight: {totalWeight} lbs</p> */}
       </div>
       {displayCards}
     </div>

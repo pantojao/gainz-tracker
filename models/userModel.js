@@ -18,6 +18,8 @@ const sessionExercise = new mongoose.Schema({
   sets: Number, 
   average: Number,
   max: Number,
+  maxLift: Number,
+  hasMax: Boolean,
   weights: [Number]
 })
 
