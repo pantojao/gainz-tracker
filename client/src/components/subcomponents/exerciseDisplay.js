@@ -18,9 +18,10 @@ function ExerciseDisplay(props) {
     let AverageWeight = Math.floor(
       data.weight.reduce((a, b) => a + b) / data.weight.length
     );
+
     let weights = [];
     for (let i=0; i< data.sets; i++){
-      weights.push(MaxWeight)
+      weights.push(0)
     }
     setExerciseId(data._id)
     setUserWeights(data.weight)

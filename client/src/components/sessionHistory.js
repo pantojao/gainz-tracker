@@ -1,10 +1,7 @@
 import { use } from "passport";
 import React, { useState, useEffect } from "react";
 import SessionCard from './subcomponents/sessionCard'
-
-
 const axios = require('axios')
-
 
 function SessionHistory(props){
   const [data, setData] = useState(null)
