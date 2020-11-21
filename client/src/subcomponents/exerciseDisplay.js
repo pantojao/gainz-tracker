@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import WeightInput from './weightInput.js'
-import CheckIcon from '../icons/check'
+import CheckIcon from '../components/icons/check'
 function ExerciseDisplay(props) {
   const [exerciseName, setExerciseName] = useState(null);
   const [exerciseId, setExerciseId] = useState(null)

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import EditRoutine from './editRoutine'
 import Dropdown from "react-bootstrap/Dropdown";
+import PlusIcon from "../components/icons/plus"
 import "bootstrap/dist/css/bootstrap.min.css";
 const axios = require("axios");
 
@@ -86,17 +87,17 @@ function Routines(props) {
       userCards.push(
         <div className="your-routine" key={routine._id}>
           <div className="routine-card-header">
-            <h2>{routine.routineName.split("+").join(" ")}</h2>
+            <h2 className="light-text">{routine.routineName.split("+").join(" ")}</h2>
             <Dropdown>
               <Dropdown.Toggle as={CustomToggle}></Dropdown.Toggle>
-              <Dropdown.Menu size="sm" title="">
+              <Dropdown.Menu size="lg" title="">
                 <Dropdown.Item onClick={() => startRoutine(routine._id)}>Start Routine</Dropdown.Item>
                 <Dropdown.Item onClick={() => changeRoutine(routine._id)}>Edit Routine</Dropdown.Item>
                 <Dropdown.Item onClick={() => removeRoutine(routine._id)}>Delete Routine</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
-          <p>{exercises}</p>
+          <p className="light-text">{exercises}</p>
         </div>
       );
     });
@@ -106,27 +107,29 @@ function Routines(props) {
 
     if(editRoutine!==null) return <EditRoutine routines={userRoutines} routineKey={editRoutine} parentCallBack={callBackFunction}/>
 
+    
     return(
-      <div className="routines">
-      <button className="btn btn-dark create-routine-btn">
-        <Link to="/new-routine">Create Routine</Link>
-      </button>
-      <h2 className="your-routines-header">Your Routines</h2>
+    <div className="routines">
+      <div className="all-routines-header">
+        <h2 className="routines-header-title">Your Routines</h2>
+        <PlusIcon />
+      </div>
+  
       <div className="your-routines">{userCards}</div>
 
       <h2 className="default-routines-header">Default Routines</h2>
       <div className="default-routines">
         <div className="default-card">
-          <h2>Push</h2>
-          <p>Bench Press, Dips, Overhead Press, Chest Flys, Tricep Extension</p>
+          <h2 className="light-text">Push</h2>
+          <p className="light-text">Bench Press, Dips, Overhead Press, Chest Flys, Tricep Extension</p>
         </div>
         <div className="default-card">
-          <h2>Pull</h2>
-          <p>Pull Ups, Lat Pulldowns, Curls, Rows</p>
+          <h2 className="light-text">Pull</h2>
+          <p className="light-text">Pull Ups, Lat Pulldowns, Curls, Rows</p>
         </div>
         <div className="default-card">
-          <h2>Legs</h2>
-          <p>Squats, Calve Raises, Leg Curls, Lunges, Hamstring Curls</p>
+          <h2 className="light-text">Legs</h2>
+          <p className="light-text">Squats, Calve Raises, Leg Curls, Lunges, Hamstring Curls</p>
         </div>
       </div>
     </div>

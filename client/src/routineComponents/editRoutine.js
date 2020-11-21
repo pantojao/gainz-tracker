@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import EditInput from "./subcomponents/editInput";
+import EditInput from "../subcomponents/editInput";
 const axios = require("axios")
 
 function EditRoutines(props) {

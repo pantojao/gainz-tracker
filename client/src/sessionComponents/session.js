@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import ExerciseDisplay from "./subcomponents/exerciseDisplay";
+import ExerciseDisplay from "../subcomponents/exerciseDisplay";
 const axios = require("axios");
 
 function Session() {
@@ -60,6 +60,7 @@ function Session() {
       return true;
     }
   };
+  
   const verifyInput = () => {
     if (data.exercises.length !== weightData.length) {
       setInputError("Please Fill Out Input");

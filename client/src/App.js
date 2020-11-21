@@ -1,13 +1,13 @@
 import React from "react";
-import Routines from './components/routines'
-import Login from './components/login.js'
-import Register from './components/register'
-import CreateRoutine from './components/createRoutine'
-import EditRoutine from './components/editRoutine'
-import Session from './components/session'
+import Routines from './routineComponents/routines'
+import Login from './signInComponents/login.js'
+import Register from './signInComponents/register'
+import CreateRoutine from './routineComponents/createRoutine'
+import EditRoutine from './routineComponents/editRoutine'
+import Session from './sessionComponents/session'
 import { BrowserRouter as Router , Switch, Route } from "react-router-dom";
-import SessionHistory from './components/sessionHistory'
-import SessionCard from './components/subcomponents/sessionCard'
+import SessionHistory from './sessionComponents/sessionHistory'
+import SessionCard from './subcomponents/sessionCard'
 
 function App() {
   return (

@@ -1,8 +1,16 @@
 
 body{
-    
   font-family: monospace;
+  background-color: #e7d6d6!important;
+  font-family: roboto, sans-serif;;
+}
 
+h1,h2,h3,p{
+  color: rgb(22, 18, 18);
+}
+
+.light-text{
+  color: #e7d6d6
 }
 
 /* NAVIGATION BAR */
@@ -17,7 +25,6 @@ justify-content: space-around;
 list-style: none;
 }
 
-
 .nav-link{
 text-decoration: none;
 margin-right: 1em;
@@ -29,7 +36,6 @@ color: white;
   display:flex;
   width: 100%;
   margin: .8em auto;
-
 }
 
 .bi-trash-fill{
@@ -45,7 +51,6 @@ color: white;
 .routine-name-input{
   width: 30% !important;
   border-style: none none solid none !important;
-  
 }
 
 .routine-name-input:focus, textarea:focus {
@@ -56,7 +61,6 @@ color: white;
 .form-control:focus{
   outline:none none solid none !important;
   border-style: none none solid none !important;
-
 }
 
 .submit-btn{
@@ -64,13 +68,6 @@ color: white;
   background-repeat:no-repeat;
   border: none;
 }
-
-
-/* .bi-check:focus{
-  outline: none!important;
-  border: none !important;
-  box-shadow: none !important
-} */
 
 .bi-pencil{
   margin: auto 1em;
@@ -114,37 +111,62 @@ color: white;
 .form-control{
   margin: 0 1em !important;
 }
+
 .sm-labels{
   margin-right: 2em;
   margin: auto 0;
 }
 
 /* ALL ROUTINES PAGE */
-.default-routines{
-  display: flex;  
+
+.all-routines-header{
+  display: flex;
+  width: 95%;
+  margin: 1em auto;
   justify-content: center;
-  width: 90%;
-  margin: 2em auto; 
+
+}
+
+.routines-header-title{
+  margin-left: auto;
+}
+.plus-icon{
+  align-self: center;
+  margin-left: auto;
+}
+
+.default-routines{
+  margin: 0 auto;
+  display: grid; 
+  width:95%;
+  gap: 2em;
+  grid-template-columns: repeat(auto-fill, minmax(14em, 20em));
+  justify-content: center;
 }
 
 .default-card{
-  background-color: red;
-  width: 20em;
+  background-color:#93291E;
+  /* background-color: #BD3F32; */
   padding: .5em 1em;
-  margin: 0 1em;
 }
 
 .your-routines {
   margin: 0 auto;
+  width:95%;
   display: grid; 
-  width:90%;
+  width:95%;
   gap: 2em;
-  grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(14em, 20em));
+  justify-content: center;
 }
+
 .your-routine{
-  background-color:rgb(110, 32, 32);
+  background-color: #dc281e;
+  /* background-color: #f00000; */
+
   padding: .5em 1em;
 }
+
 .your-routines-header{
   margin: 1em;
   text-align: center;
@@ -155,16 +177,10 @@ color: white;
   text-align: center;
 }
 
-.create-routine-btn{
-  margin: 2em 0 0 85%;
-
-}
-
 .routine-card-header{
   display: flex;
   justify-content: space-between;
 }
-
 
 
 /* SESSION PAGE */
@@ -336,10 +352,11 @@ color: white;
 
 /* EXERCISE CARD FROM SESSION HISTORY */
 .session-card-header-half{
-  outline: 2px gold solid;
-  margin: 2em 0em;
+  outline: 4px red solid;
+  margin: 3em 0em;
   padding: 1.5em 0em
 }
+
 .session-card-title-half{
   text-align: left;
   font-size: 1.5rem;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ExerciseInput from "./subcomponents/exerciseInput";
+import ExerciseInput from "../subcomponents/exerciseInput";
 import { useHistory } from "react-router-dom";
 const axios = require("axios");
 
