@@ -32,37 +32,42 @@ function SessionCard(props) {
     setDisplayFull(!displayFull);
   };
 
-   // FULL VERSION
+  //  FULL VERSION
   let cards = [];
   let rowIndex = 0;
   if (exercises)
     for (let exercise of exercises) {
       let card = (
-        <div className="exercise-card">
+        <div className="exercise-card" key={exercise._id}>
           <div className="exercise-headers">
-            <h2 className="exercise-header">{exercise.exerciseName}</h2>
+            <h2 className="exercise-header light-text">{exercise.exerciseName}</h2>
             {rowIndex == 0 ? <ImprovementIcon /> : null}
           </div>
           {exercise.weights.map((weight, index) => (
-            <div className="exercise-details">
-              <p className="exercise-detail">{index + 1}</p>
-              <p className="exercise-detail">
+            <div className="exercise-details" key={index}>
+              <p className="exercise-detail light-text">{index + 1}</p>
+              <p className="exercise-detail light-text">
                 {exercise.reps} reps of {weight} lbs
               </p>
               <div className="lift-improvements">
-                <p className="average-improvement">
-                  {weight - exercise.average > 0
-                    ? `+${weight - exercise.average} lb`
-                    : `${weight - exercise.average} lb`}
-                </p>
+                  <p className="average-improvement light-text">
+                    {weight - exercise.average > 0
+                      ? `+${weight - exercise.average} lb`
+                      : `${weight - exercise.average} lb`}
+                  </p>
+              
                 {weight > exercise.max ? (
-                  <TrophyIcon fill={true} />
+                  <TrophyIcon fill={true} max={exercise.max} key={exercise._id}/>
                 ) : (
-                  <TrophyIcon fill={false} />
+                  <TrophyIcon fill={false} max={exercise.max} key={exercise._id}/>
                 )}
               </div>
             </div>
           ))}
+          <div style={{display: "flex", justifyContent:"space-between", marginTop: ".5em"}}>
+            <p className="light-text"> {`Average: ${exercise.average}`}</p>
+            <p className="light-text">{`Prev Max: ${exercise.max}`}</p>
+          </div>
         </div>
       );
       rowIndex++;
@@ -74,36 +79,39 @@ function SessionCard(props) {
   if (exercises)
     for (let exercise of exercises) {
       let card = (
-        <div className="exercise-card-half">
-          <div className="exercise-headers-half">
-            <h2 className="exercise-header-half">{exercise.exerciseName}</h2>
-            <p className="exercise-header-half">{`${exercise.maxLift}lbs`}</p>
+        <div className="exercise-card-half" key={exercise._id}>
+          <div className="exercise-headers-half light-text">
+            <h2 className="exercise-header-half light-text">{exercise.exerciseName}</h2>
+            <p className="exercise-header-half light-text">{`${exercise.maxLift}lbs`}</p>
             {exercise.hasMax ? (
-              <TrophyIcon fill={true} />
+              <TrophyIcon fill={true} max={exercise.max} key={exercise._id}/>
             ) : (
-              <TrophyIcon fill={false} />
+              <TrophyIcon fill={false} max={exercise.max} key={exercise._id}/>
             )}
           </div>
         </div>
-      );
+      )
       displayCards.push(card);
     }
 
-  // RENDER CONTENT
 
+
+
+  // RENDER CONTENT
   return displayFull ? (
-    <div onBlur={() => changeDisplay()}>
-      <div className="session-card-header">
+    <div className="session-card-header" onBlur={() => changeDisplay()}>
+      <div>
         <div className="session-card-top-half">
-          <h1 className="session-card-title-half">{routineName}</h1>
+          <h1 className="session-card-title-half light-text">{routineName}</h1>
           <ExpandIcon changeDisplay={changeDisplay} />
         </div>
-        <p className="session-card-data">Start Time: {sessionTime}</p>
+        <p className="session-card-data light-text">Start Time: {sessionTime}</p>
         <div className="session-card-details">
-          <p>
+          <p className='light-text'>
             <ClockIcon /> {sessionLength}
           </p>
-          <p>Total Weight: {totalWeight} lbs</p>
+
+          <p className="light-text">Total Weight: {totalWeight} lbs</p>
         </div>
       </div>
       {cards}
@@ -112,16 +120,17 @@ function SessionCard(props) {
   ) : !displayFull ? (
     <div className="session-card-header-half">
       <div className="session-card-top-half">
-        <h1 className="session-card-title-half">{routineName}</h1>
+        <h1 className="light-text session-card-title-half">{routineName}</h1>
         <ExpandIcon changeDisplay={changeDisplay} />
       </div>
-      <p className="session-card-data-half">Start Time: {sessionTime}</p>
-      <div className="session-card-details-half">
-        <p>
+      <p className="light-text session-card-data-half">Start Time: {sessionTime}</p>
+      <div className="light-text session-card-details-half">
+        <p className="light-text session-length">
           <ClockIcon /> {sessionLength}
         </p>
       </div>
       {displayCards}
+
     </div>
   ) : null;
 }

@@ -8,10 +8,12 @@ import Session from './sessionComponents/session'
 import { BrowserRouter as Router , Switch, Route } from "react-router-dom";
 import SessionHistory from './sessionComponents/sessionHistory'
 import SessionCard from './subcomponents/sessionCard'
+import NavigationMenus from './navigation'
 
 function App() {
   return (
     <div className="App">
+     <NavigationMenus />
      <Router>
       <Switch>
         <Route exact path="/">
@@ -35,12 +37,8 @@ function App() {
         <Route path="/session-history">
           <SessionHistory />
         </Route>
-        <Route path="/session-card">
-          <SessionCard /> 
-        </Route>
       </Switch> 
     </Router>
-
     </div>
   );
 }

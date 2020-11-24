@@ -1,7 +1,7 @@
 
 body{
   font-family: monospace;
-  background-color: #e7d6d6!important;
+  background-color: #ffffff!important;
   font-family: roboto, sans-serif;;
 }
 
@@ -34,13 +34,11 @@ color: white;
 /* CREATE ROUTINE PAGE */
 .new-exercise-inputs{
   display:flex;
-  width: 100%;
-  margin: .8em auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1em auto;
 }
 
-.bi-trash-fill{
-  margin: auto 0 
-}
 .routine-name{
   display: flex;
   justify-content: center;
@@ -49,12 +47,12 @@ color: white;
 }
 
 .routine-name-input{
-  width: 30% !important;
+  width: 13em !important;
   border-style: none none solid none !important;
 }
 
 .routine-name-input:focus, textarea:focus {
-  width: 30% !important;
+  width: 13em !important;
   border-style: none none solid none !important;
 }
 
@@ -78,43 +76,59 @@ color: white;
   flex-direction: column;
   justify-content: space-between;
   margin: 0 auto;
-  width: 80%;
+  width: 95%;
+  
 }
 
 .create-routine-buttons{
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-flow: column wrap;
+  
 }
 
 .add-exercise-button{
   margin: 1em auto;
-  width: 25%;
-
+  width: 15em;
 }
 
 .submit-routine-button{
   margin: 1em auto;
 }
+
 .submit-cancel{
   display: flex; 
   justify-content: space-between;
   margin: 2em auto;
-  width: 25%;
+  width: 15em;
+  
+}
 
+.number-input-div{
+  display: flex;
+  justify-content: space-between;
+ 
+}
+
+.bi-trash-fill{
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.exercise-inputs{
+  width: 16em !important;
+  margin-top: 1em !important;
+  margin: 0 auto;
 }
 
 .number-input{
-  width: 5em  !important;
-}
-
-.form-control{
-  margin: 0 1em !important;
+  width: 5.3em  !important;
+  margin: 1em auto !important
 }
 
 .sm-labels{
-  margin-right: 2em;
-  margin: auto 0;
+  margin: auto 0.3em;
 }
 
 /* ALL ROUTINES PAGE */
@@ -124,7 +138,6 @@ color: white;
   width: 95%;
   margin: 1em auto;
   justify-content: center;
-
 }
 
 .routines-header-title{
@@ -145,7 +158,7 @@ color: white;
 }
 
 .default-card{
-  background-color:#93291E;
+  background-color:#dc281e;
   /* background-color: #BD3F32; */
   padding: .5em 1em;
 }
@@ -162,8 +175,6 @@ color: white;
 
 .your-routine{
   background-color: #dc281e;
-  /* background-color: #f00000; */
-
   padding: .5em 1em;
 }
 
@@ -221,7 +232,6 @@ color: white;
   justify-content: space-between;
   width: 90%;
   margin: 1em auto;
-  /* outline: 2px yellow solid; */
 }
 
 .exercise-name{
@@ -229,14 +239,12 @@ color: white;
 }
 
 .exercise-stats{
-  /* outline: 2px yellow solid; */
   display: flex; 
   flex-flow: column wrap;
   justify-content: center
 }
 
 .exercise-stat{
-  /* outline: 2px red solid; */
   margin: auto 0;
 }
 
@@ -261,8 +269,9 @@ color: white;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-evenly;
-  /* outline: 2px red solid; */
+
 }
+
 
 /* weight-input-form */
 
@@ -280,7 +289,6 @@ color: white;
   background-repeat:no-repeat;
   border: none;
 }
-
 
 
 /* SESSION-CARD */
@@ -314,7 +322,6 @@ color: white;
 
 .exercise-header{
   font-size: 1rem;
-
 }
 .exercise-card{
   width: 80%;
@@ -324,7 +331,6 @@ color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* outline: 2px yellow solid; */
 }
 
 .exercise-detail{
@@ -349,12 +355,17 @@ color: white;
   margin-top: -.5em
 }
 
-
 /* EXERCISE CARD FROM SESSION HISTORY */
+.session-card-header{
+  margin: 3em .25em;
+  padding: 1.5em 0em;
+  background-color: rgb(12, 12, 12);
+}
+
 .session-card-header-half{
-  outline: 4px red solid;
-  margin: 3em 0em;
-  padding: 1.5em 0em
+  margin: 3em .25em; 
+  padding: 1.5em 0em;
+  background-color: rgb(12, 12, 12);
 }
 
 .session-card-title-half{
@@ -365,10 +376,15 @@ color: white;
 
 .session-card-details-half{
   display: flex;
-  flex-direction: column;
-  width: 90%;
-  margin: 0 auto;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  width: 95%;
+  margin: 0.5em auto;
+
 }
+
 
 .session-card-data-half{
   width: 90%;
@@ -393,5 +409,9 @@ color: white;
   display: flex;
   justify-content: space-between;
   width: 95%;
+}
 
+.nav-dropdown{
+  width: 95%;
+  margin: 1em auto;
 }
