@@ -41,13 +41,17 @@ function Login(props) {
   const inputResponse = (serverMessage!==null)? <p>{serverMessage}</p>:null
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div >
+      <h1 style={{textAlign:"center"}}>Gainz Tracker</h1>
       {inputResponse}
-      <input type="text" placeholder="username" value={username} onChange = {(event) => changeUserName(event)}/>
-      <input type="text" placeholder="password" value={password} onChange = {(event) => changePassword(event)}/>
-      <button onClick = {() => login()}>Submit</button>
-      <Link to="/register">New to Gainz Tracker?</Link>
+      <div className="login-inputs">
+        <input type="text" className="form-control username-input" placeholder="username" value={username} onChange = {(event) => changeUserName(event)}/>
+        <input type="text" className="form-control password-input" placeholder="password" value={password} onChange = {(event) => changePassword(event)}/>
+        <button className="btn btn-primary login-btn" onClick = {() => login()}>Log In</button>
+        <Link style={{textAlign:"center", marginTop: "2.5em"}} to="/register">New to Gainz Tracker?</Link>
+
+      </div>
+    
     </div>
   )
 }

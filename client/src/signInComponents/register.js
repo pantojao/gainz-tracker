@@ -37,25 +37,29 @@ function Register() {
 
   return (
     <div>
-      <h1>Register</h1>
+      <h1 style={{textAlign:"center"}}>Gainz Tracker</h1>
+      <p style={{textAlign:"center", marginTop: "1.5em"}} >Create Your Account</p>
       {inputResponse}
-      <input
-        type="text"
-        placeholder="username"
-        value={username}
-        onChange={(event) => changeUserName(event)}
-      />
+      <div className="login-inputs">
+        <input
+          type="text"
+          className="form-control username-input"
+          placeholder="username"
+          value={username}
+          onChange={(event) => changeUserName(event)}
+        />
 
-      <input
-        type="text"
-        placeholder="password"
-        value={password}
-        onChange={(event) => changePassword(event)}
-      />
-
-      <button onClick={() => register()}>Submit</button>
+        <input
+          type="text"
+          placeholder="password"
+          className="form-control password-input"
+          value={password}
+          onChange={(event) => changePassword(event)}
+        />
+        <button className="btn btn-primary login-btn" onClick={() => register()}>Register</button>
       
-      <Link to="/">Already Have an Account?</Link>
+        <Link style={{textAlign:"center", marginTop: "2.5em"}} to="/">Already Have an Account?</Link>
+      </div>
     </div>
   );
 }

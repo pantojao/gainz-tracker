@@ -20,6 +20,8 @@ const editRoutineRoute = require("./routes/edit-routine");
 const startSessionRoute = require("./routes/start-session");
 const finishSessionRoute = require("./routes/finish-session");
 const sessionHistoryRoute = require("./routes/session-history");
+const authenticateUserRoute = require("./routes/authenticate-user");
+const logoutUserRoute = require("./routes/logout-user");
 
 // DATABASE IMPLEMENTATION
 mongoose.connect(process.env.MONGO_URI, {
@@ -29,6 +31,7 @@ mongoose.connect(process.env.MONGO_URI, {
 mongoose.connection.on("connect", () => {
   console.log("connected to database");
 });
+
 const sessionStore = new MongoStore({mongooseConnection: mongoose.connection, collection: 'sessions'})
 
 app.use(express.json());
@@ -80,6 +83,16 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+
+const authenticateUser = (req, res, next) =>{
+  if (req.isAuthenticated()){
+    next()
+  } else {
+    res.send("login")
+  }
+}
+
+
 // ROUTES
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
@@ -90,7 +103,8 @@ app.use("/edit-routine", editRoutineRoute)
 app.use("/start-session", startSessionRoute)
 app.use("/finish-session", finishSessionRoute)
 app.use("/session-history", sessionHistoryRoute)
-
+app.use("/authenticate-user", authenticateUserRoute)
+app.use("/logout-user", logoutUserRoute)
 
 
 app.listen(3001, () => {

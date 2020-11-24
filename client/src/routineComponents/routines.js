@@ -4,13 +4,14 @@ import EditRoutine from './editRoutine'
 import Dropdown from "react-bootstrap/Dropdown";
 import PlusIcon from "../components/icons/plus"
 import "bootstrap/dist/css/bootstrap.min.css";
+import Logout from "../signInComponents/logout";
 const axios = require("axios");
 
 function Routines(props) {
   const [userRoutines, setUserRoutines] = useState(null);
   const [editRoutine, setEditRoutine] = useState(null)
   const history = useHistory()
-  
+
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
       href=""
@@ -109,7 +110,9 @@ function Routines(props) {
 
     
     return(
+
     <div className="routines">
+      <Logout />
       <div className="all-routines-header">
         <h2 className="routines-header-title">Your Routines</h2>
         <PlusIcon />
