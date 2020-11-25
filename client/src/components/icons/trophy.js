@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import { useEffect } from 'react';
-import {Button, UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
 
 const TrophyIcon = (props) => {
   const [fill, setFill] = useState(null)

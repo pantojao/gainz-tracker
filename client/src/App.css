@@ -72,12 +72,10 @@ color: white;
 
 .routine-name-input{
   width: 13em !important;
-  border-style: none none solid none !important;
 }
 
 .routine-name-input:focus, textarea:focus {
   width: 13em !important;
-  border-style: none none solid none !important;
 }
 
 .form-control:focus{
@@ -228,7 +226,9 @@ color: white;
   display: flex;
   justify-content: space-between;
   width: 90%;
+  max-height: 3em;
   margin: 1em auto;
+  
 }
 
 .rest-timer-btn{

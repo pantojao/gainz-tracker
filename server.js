@@ -22,6 +22,7 @@ const finishSessionRoute = require("./routes/finish-session");
 const sessionHistoryRoute = require("./routes/session-history");
 const authenticateUserRoute = require("./routes/authenticate-user");
 const logoutUserRoute = require("./routes/logout-user");
+const getUserRoute = require("./routes/get-user");
 
 // DATABASE IMPLEMENTATION
 mongoose.connect(process.env.MONGO_URI, {
@@ -105,6 +106,7 @@ app.use("/finish-session", finishSessionRoute)
 app.use("/session-history", sessionHistoryRoute)
 app.use("/authenticate-user", authenticateUserRoute)
 app.use("/logout-user", logoutUserRoute)
+app.use("/get-user", getUserRoute)
 
 
 app.listen(3001, () => {

@@ -1,19 +1,18 @@
 import Axios from 'axios'
-import react, {useState, useEffect} from 'react'
-import { Redirect } from 'react-router-dom'
+import { authorize } from 'passport'
+import React, {useState, useEffect} from 'react'
+import { Redirect, useHistory } from 'react-router-dom'
 
 const Logout  = () => {
-  const [click, setClick] = useState(false)
+  const history = useHistory()
 
   const handleClick = async() => {
     const serverResponse = await Axios.get('/logout-user')
-    if (serverResponse.data) {
-      <Redirect to="/"/>
-    } 
+    if (serverResponse.data) history.push('/')
   }
 
   return (
-    <button onClick={() => handleClick()} className="btn btn-danger btn-sm">Log Out</button>
+    <a style ={{ width: "6em", marginTop: "1em",  color: "blue"}} onClick={() => handleClick()}>Log Out</a>
   )
 } 
 

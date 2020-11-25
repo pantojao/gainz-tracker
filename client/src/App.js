@@ -5,37 +5,42 @@ import Register from "./signInComponents/register";
 import CreateRoutine from "./routineComponents/createRoutine";
 import EditRoutine from "./routineComponents/editRoutine";
 import Session from "./sessionComponents/session";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import SessionHistory from "./sessionComponents/sessionHistory";
 import NavigationMenus from "./navigation";
 import Axios from "axios";
+import LoadingIcon from "./components/icons/loading";
+
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
-
+  const [loggedIn, setLoggedIn] = useState(false);
+  
   useEffect(async() => {
       let serverResponse = await Axios.get("/authenticate-user");
-      console.log(serverResponse)
       if (serverResponse.data && !loggedIn) {
         setLoggedIn(true);
       } else if (!serverResponse.data && loggedIn) {
         setLoggedIn(false);
       }
-  }, [])
+  },[])
 
+  const getAuthentication = (authenticated) => {
+    if (authenticated){
+      setLoggedIn(true) 
+    }
+  }
+
+  const notAuthenticated = <LoadingIcon loggedIn={loggedIn}/> 
+
+  console.log(loggedIn)
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/">
-            <Login />
+            <Login authenticatedUser={getAuthentication} />
           </Route>
-
+          
           <Route path="/register">
             <Register />
           </Route>
@@ -46,9 +51,7 @@ function App() {
                 <NavigationMenus />
                 <CreateRoutine />
               </>
-            ) : (
-              <Redirect to="/" />
-            )}
+            ) : notAuthenticated}
           </Route>
 
           <Route path="/routines">
@@ -57,9 +60,7 @@ function App() {
                 <NavigationMenus />
                 <Routines />
               </>
-            ) : (
-              <Redirect to="/" />
-            )}
+            ) : notAuthenticated}
           </Route>
 
           <Route path="/edit-routine">
@@ -68,9 +69,7 @@ function App() {
                 <NavigationMenus />
                 <EditRoutine />
               </>
-            ) : (
-              <Redirect to="/" />
-            )}
+            ) : notAuthenticated}
           </Route>
 
           <Route path="/session/:routineID">
@@ -79,9 +78,7 @@ function App() {
                 <NavigationMenus />
                 <Session />
               </>
-            ) : (
-              <Redirect to="/" />
-            )}
+            ) : notAuthenticated}
           </Route>
 
           <Route path="/session-history">
@@ -90,11 +87,9 @@ function App() {
                 <NavigationMenus />
                 <SessionHistory />
               </>
-            ) : (
-              <Redirect to="/" />
-            )}
+            ) : notAuthenticated}
           </Route>
-
+            
         </Switch>
       </Router>
     </div>

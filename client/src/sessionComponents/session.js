@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import ExerciseDisplay from "../subcomponents/exerciseDisplay";
+import RestTimer from '../subcomponents/restTimer'
 const axios = require("axios");
 
 function Session() {
@@ -119,22 +120,8 @@ function Session() {
   return (
     <>
       <div className="session-btns">
-        <button className="rest-timer-btn">
-          <svg
-            width="2em"
-            height="2em"
-            viewBox="0 0 16 16"
-            className="bi bi-stopwatch text-primary"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M6 .5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H9v1.07A7.001 7.001 0 0 1 8 16 7 7 0 0 1 7 2.07V1h-.5A.5.5 0 0 1 6 .5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3zm0 2.1a.5.5 0 0 1 .5.5V9a.5.5 0 0 1-.5.5H4.5a.5.5 0 0 1 0-1h3V5.6a.5.5 0 0 1 .5-.5z"
-            />
-          </svg>
-        </button>
-        {inputError ? <p>{inputError}</p> : <p>Lets Get Started</p>}
+        <RestTimer />
+        {/* {inputError ? <p>{inputError}</p> : <p>Lets Get Started</p>} */}
         <button
           onClick={() => finishSession()}
           className="btn btn-md btn-success finish-session-btn"

@@ -7,7 +7,7 @@ function Login(props) {
   const [password, setpassword] = useState("")
   const [serverMessage, setServerMessage] = useState(null);
   const history = useHistory();
-
+  
   const changePassword = (event) =>{
     setpassword(event.target.value)
   }
@@ -28,13 +28,15 @@ function Login(props) {
       })
 
       if (serverResponse.data=="Successfully Authenticated"){
+        props.authenticatedUser(true)
         history.push("/routines")
+      } else{
+        setServerMessage(serverResponse.data)
       }
-
-      setServerMessage(serverResponse.data)
+    
     } catch (error) {
       setServerMessage("Username or Password Is Incorrect")
-      throw error
+      console.log(error)
     }
   } 
 
@@ -49,9 +51,7 @@ function Login(props) {
         <input type="text" className="form-control password-input" placeholder="password" value={password} onChange = {(event) => changePassword(event)}/>
         <button className="btn btn-primary login-btn" onClick = {() => login()}>Log In</button>
         <Link style={{textAlign:"center", marginTop: "2.5em"}} to="/register">New to Gainz Tracker?</Link>
-
       </div>
-    
     </div>
   )
 }
