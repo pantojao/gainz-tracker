@@ -109,7 +109,7 @@ app.use("/logout-user", logoutUserRoute)
 app.use("/get-user", getUserRoute)
 
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || 3001, () => {
   console.log("listening on port 3001");
 });
 
