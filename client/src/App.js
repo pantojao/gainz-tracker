@@ -89,7 +89,6 @@ function App() {
               </>
             ) : notAuthenticated}
           </Route>
-            
         </Switch>
       </Router>
     </div>
