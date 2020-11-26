@@ -36,9 +36,10 @@ function RestTimer() {
 
   return (
     <>
-      <div id="PopoverLegacy" type="button">
+      <div id="PopoverLegacy" type="button" ondblclick={() => {console.log("double"); setStartTimer(!startTimer)}}>
         <Timer size={80} lineThickness={5}/>
       </div>
+      
 
       <UncontrolledPopover trigger="legacy" placement="bottom" target="PopoverLegacy">
         <PopoverHeader>Rest Timer</PopoverHeader>
@@ -53,7 +54,7 @@ function RestTimer() {
             }
     
           </div>
-          {/* <Timer /> */}
+        
         </PopoverBody>
       </UncontrolledPopover>
     </>
