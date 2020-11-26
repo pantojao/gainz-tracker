@@ -14,7 +14,7 @@ function Register() {
 
   const register = async () => {
     try {
-      const serverResponse = await axios.post({
+      const serverResponse = await axios({
         method: "post",
         data: {
           username: username,

@@ -9,8 +9,6 @@ const {User} = require("./models/userModel");
 const bcrypt = require("bcrypt")
 var MongoStore  = require('connect-mongo')(session);
 const app = express();
-
-
 const PORT = process.env.PORT || 3001;
 
 const loginRoute = require("./routes/login");
@@ -95,7 +93,6 @@ const authenticateUser = (req, res, next) =>{
   }
 }
 
-
 // ROUTES
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
@@ -111,13 +108,10 @@ app.use("/logout-user", logoutUserRoute)
 app.use("/get-user", getUserRoute)
 
 
-//Non api requests in production
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
   // Add production middleware such as redirecting to https
 
-  // Express will serve up production assets i.e. main.js
   app.use(express.static(__dirname + '/client/build'));
-  // If Express doesn't recognize route serve index.html
   const path = require('path');
   app.get('*', (req, res) => {
       res.sendFile(
