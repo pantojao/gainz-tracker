@@ -14,14 +14,14 @@ function Register() {
 
   const register = async () => {
     try {
-      const serverResponse = await axios({
+      const serverResponse = await axios.post({
         method: "post",
         data: {
           username: username,
           password: password,
         },
         withCredentials: true,
-        url: "http://localhost:3001/register",
+        url: "/register",
       });
 
       if (serverResponse.data==="User Created"){history.push("/");}

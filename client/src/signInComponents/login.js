@@ -24,7 +24,7 @@ function Login(props) {
           password:password
         },
         withCredentials: true,
-        url: "http://localhost:3001/login"
+        url: "/login"
       })
 
       if (serverResponse.data=="Successfully Authenticated"){
