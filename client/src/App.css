@@ -13,7 +13,6 @@ h1,h2,h3,p{
   color: #e7d6d6
 }
 
-
 /* LOGIN PAGE */
 .login-inputs{
   width: 95%;
@@ -373,6 +372,7 @@ color: white;
 
 .trophy-icon{
   margin: auto 0;
+  background-color: black;
 }
 
 .improvement-icon{
