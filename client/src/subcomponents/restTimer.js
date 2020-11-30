@@ -22,6 +22,7 @@ function RestTimer() {
     let time = parseInt(interval)
     if (!time) time=45
     return(
+
       <CountdownCircleTimer isPlaying={startTimer} duration={time} size={props.size} strokeWidth={props.lineThickness} colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]} >
         {renderTime}
       </CountdownCircleTimer>
@@ -36,16 +37,15 @@ function RestTimer() {
 
   return (
     <>
-      <div id="PopoverLegacy" type="button" ondblclick={() => {console.log("double"); setStartTimer(!startTimer)}}>
-        <Timer size={80} lineThickness={5}/>
+      <div id="PopoverLegacy" type="button" className="timer-div">
+        <Timer size={70} lineThickness={4}/>
       </div>
       
-
       <UncontrolledPopover trigger="legacy" placement="bottom" target="PopoverLegacy">
         <PopoverHeader>Rest Timer</PopoverHeader>
         <PopoverBody>
           <div style={{display: "flex", justifyContent:"space-between", marginBottom: "1em"}}>
-            <input type="number" className="form-control" defaultValue={45} value={interval} min="1" placeholder='45' onChange={(event) => setTime(event)}/> 
+            <input type="number" style={{width: "7em"}} className="form-control" defaultValue={45} value={interval} min="1" placeholder='45' onChange={(event) => setTime(event)}/> 
 
             {startTimer ? 
               <button className="btn btn-danger" onClick={() => start()}>Stop</button> 

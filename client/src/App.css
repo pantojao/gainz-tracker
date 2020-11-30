@@ -437,4 +437,20 @@ color: white;
 .nav-dropdown{
   width: 95%;
   margin: 1em auto;
+  background-color: #ffffff!important;
+  background-repeat:no-repeat;
+  border: none;
+}
+
+.dropdown-toggle{
+  background-color: #ffffff!important;
+  background-repeat:no-repeat;
+  border: none;
+}
+
+.timer-div{
+  background-color: #ffffff!important;
+  background-repeat:no-repeat;
+  border: none;
+  
 }
