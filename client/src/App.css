@@ -437,20 +437,19 @@ color: white;
 .nav-dropdown{
   width: 95%;
   margin: 1em auto;
-  background-color: #ffffff!important;
-  background-repeat:no-repeat;
-  border: none;
+  border:none;
+  background-color:transparent;
+  outline:none;
 }
 
 .dropdown-toggle{
-  background-color: #ffffff!important;
-  background-repeat:no-repeat;
-  border: none;
+  border:none;
+  background-color:transparent;
+  outline:none;
 }
 
 .timer-div{
-  background-color: #ffffff!important;
-  background-repeat:no-repeat;
-  border: none;
-  
+  border:none;
+  background-color:transparent;
+  outline:none;
 }
