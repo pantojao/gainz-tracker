@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef} from "react";
 import SessionCard from '../subcomponents/sessionCard'
 const axios = require('axios')
 
-
-
 function SessionHistory(props){
   const [data, setData] = useState(null)
   const [sessionCards, setSessionCards] = useState(null)
@@ -20,7 +18,6 @@ function SessionHistory(props){
 
   const myRef = useRef(null)
   const executeScroll = () => scrollToRef(myRef)
-
   
   useEffect(async() => {
     let serverResponse = await axios.post("/session-history")

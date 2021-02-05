@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import EditRoutine from './editRoutine'
 import Dropdown from "react-bootstrap/Dropdown";
 import PlusIcon from "../components/icons/plus"
-import "bootstrap/dist/css/bootstrap.min.css";
 const axios = require("axios");
 
 function Routines(props) {
@@ -22,11 +21,11 @@ function Routines(props) {
     >
       {children}
       <svg
-        width="1em"
-        height="1em"
+        width="1.3em"
+        height="1.4em"
         viewBox="0 0 16 16"
         className="bi bi-three-dots-vertical"
-        fill="currentColor"
+        fill="rgb(255,223,0)"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
@@ -56,7 +55,6 @@ function Routines(props) {
   }
 
   const changeRoutine = (key) => setEditRoutine(key);
-
 
   const callBackFunction = (childData) => {
     if (childData === "done") setEditRoutine(null)
@@ -103,7 +101,6 @@ function Routines(props) {
     });
   }
 
- 
 
     if(editRoutine!==null) return <EditRoutine routines={userRoutines} routineKey={editRoutine} parentCallBack={callBackFunction}/>
 
@@ -115,7 +112,6 @@ function Routines(props) {
         <h2 className="routines-header-title">Your Routines</h2>
         <PlusIcon />
       </div>
-  
       <div className="your-routines">{userCards}</div>
 
       <h2 className="default-routines-header">Default Routines</h2>

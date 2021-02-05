@@ -1,4 +1,3 @@
-import { PromiseProvider } from 'mongoose'
 import React, {useEffect, useState} from 'react'
 
 const CheckIcon = (props) => {

@@ -180,7 +180,6 @@ color: white;
 
 .default-card{
   background-color:#dc281e;
-  /* background-color: #BD3F32; */
   padding: .5em 1em;
 }
 
@@ -195,7 +194,7 @@ color: white;
 }
 
 .your-routine{
-  background-color: #dc281e;
+  background-color: #dc271ef5;
   padding: .5em 1em;
 }
 

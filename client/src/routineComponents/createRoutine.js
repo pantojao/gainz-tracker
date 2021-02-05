@@ -93,7 +93,6 @@ function CreateRoutine(props) {
       } catch (error) {
         console.log(error);
       }
-      
     }
   }, [send]);
   
@@ -121,7 +120,7 @@ function CreateRoutine(props) {
               disabled={invalid}
               className="submit-buttons btn btn-success"
             />
-            <button className="btn btn-danger" onClick = {() => handleCancel()}>Cancel</button>
+            <button className="btn btn-danger" onClick = {() => history.push('/routines')}>Cancel</button>
           </div>
           
         </div>

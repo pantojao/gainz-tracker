@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import SessionHistory from "./sessionComponents/sessionHistory";
 import NavigationMenus from "./navigation";
 import Axios from "axios";
-import LoadingIcon from "./components/icons/loading";
 
 
 function App() {
@@ -30,9 +29,6 @@ function App() {
     }
   }
 
-  const notAuthenticated = <LoadingIcon loggedIn={loggedIn}/> 
-
-  console.log(loggedIn)
   return (
     <div className="App">
       <Router>
@@ -51,7 +47,7 @@ function App() {
                 <NavigationMenus />
                 <CreateRoutine />
               </>
-            ) : notAuthenticated}
+            ) : null}
           </Route>
 
           <Route path="/routines">
@@ -60,7 +56,7 @@ function App() {
                 <NavigationMenus />
                 <Routines />
               </>
-            ) : notAuthenticated}
+            ) : null}
           </Route>
 
           <Route path="/edit-routine">
@@ -69,7 +65,7 @@ function App() {
                 <NavigationMenus />
                 <EditRoutine />
               </>
-            ) : notAuthenticated}
+            ) : null}
           </Route>
 
           <Route path="/session/:routineID">
@@ -78,7 +74,7 @@ function App() {
                 <NavigationMenus />
                 <Session />
               </>
-            ) : notAuthenticated}
+            ) : null}
           </Route>
 
           <Route path="/session-history">
@@ -87,7 +83,7 @@ function App() {
                 <NavigationMenus />
                 <SessionHistory />
               </>
-            ) : notAuthenticated}
+            ) : null}
           </Route>
         </Switch>
       </Router>

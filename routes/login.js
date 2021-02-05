@@ -9,7 +9,7 @@ router.post("/",  (req, res, next) => {
     if (err) throw err;
     if (!user) res.send("Incorrect Password or Username");
     else {
-      req.logIn(user, (err) => {
+        req.logIn(user, (err) => {
         if (err) throw err;
         res.send("Successfully Authenticated");
       });

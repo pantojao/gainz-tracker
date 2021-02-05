@@ -48,7 +48,7 @@ function Login(props) {
       {inputResponse}
       <div className="login-inputs">
         <input type="text" className="form-control username-input" placeholder="username" value={username} onChange = {(event) => changeUserName(event)}/>
-        <input type="text" className="form-control password-input" placeholder="password" value={password} onChange = {(event) => changePassword(event)}/>
+        <input type="password" className="form-control password-input" placeholder="password" value={password} onChange = {(event) => changePassword(event)}/>
         <button className="btn btn-primary login-btn" onClick = {() => login()}>Log In</button>
         <Link style={{textAlign:"center", marginTop: "2.5em"}} to="/register">New to Gainz Tracker?</Link>
       </div>

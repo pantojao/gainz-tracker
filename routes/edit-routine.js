@@ -23,10 +23,6 @@ router.post("/", async (req, res) => {
       console.log(exercise._id)
     }
   }
-  
-  console.log('========================================')
-
-  console.log(newExercises)
 
   for (let routine of routines){
     if(routine._id == routineKey){
@@ -34,7 +30,6 @@ router.post("/", async (req, res) => {
       routine.routineName = routineName
     }
   } 
-  console.log('||||||||||||||||||||||||||||||||||||||')
 
   try {
     let mongoResponse = await currentUser.save()
@@ -44,7 +39,6 @@ router.post("/", async (req, res) => {
     console.log(error)
     res.send("error on our end")
   }
-  
 });
 
 module.exports = router;
